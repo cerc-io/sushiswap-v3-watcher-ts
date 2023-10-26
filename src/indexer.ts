@@ -364,7 +364,7 @@ export class Indexer implements IndexerInterface {
     if (!this._serverConfig.enableState) {
       return;
     }
-    
+
     const dbTx = await this._db.createTransactionRunner();
     let res;
 
