@@ -13,7 +13,7 @@
   # CAUTION: Disable only if state creation is not desired or can be filled subsequently
   enableState = true
 
-  subgraphPath = "/home/nabarun/deepstack/subgraphs/subgraphs/v3/build"
+  subgraphPath = "./subgraph-build"
 
   # Interval to restart wasm instance periodically
   wasmRestartBlocksInterval = 20
