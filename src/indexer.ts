@@ -91,6 +91,7 @@ export class Indexer implements IndexerInterface {
   _abiMap: Map<string, JsonFragment[]>;
   _storageLayoutMap: Map<string, StorageLayout>;
   _contractMap: Map<string, ethers.utils.Interface>;
+  _eventSignaturesMap: Map<string, string[]>;
 
   _entityTypesMap: Map<string, { [key: string]: string }>;
   _relationsMap: Map<any, { [key: string]: any }>;
@@ -112,6 +113,9 @@ export class Indexer implements IndexerInterface {
     this._abiMap = new Map();
     this._storageLayoutMap = new Map();
     this._contractMap = new Map();
+    this._eventSignaturesMap = new Map();
+    let contractInterface: ethers.utils.Interface;
+    let eventSignatures: string[];
 
     const { abi: FactoryABI } = FactoryArtifacts;
 
@@ -121,15 +125,36 @@ export class Indexer implements IndexerInterface {
 
     assert(FactoryABI);
     this._abiMap.set(KIND_FACTORY, FactoryABI);
-    this._contractMap.set(KIND_FACTORY, new ethers.utils.Interface(FactoryABI));
+
+    contractInterface = new ethers.utils.Interface(FactoryABI);
+    this._contractMap.set(KIND_FACTORY, contractInterface);
+
+    eventSignatures = Object.values(contractInterface.events).map(value => {
+      return contractInterface.getEventTopic(value);
+    });
+    this._eventSignaturesMap.set(KIND_FACTORY, eventSignatures);
 
     assert(NonfungiblePositionManagerABI);
     this._abiMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, NonfungiblePositionManagerABI);
-    this._contractMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, new ethers.utils.Interface(NonfungiblePositionManagerABI));
+
+    contractInterface = new ethers.utils.Interface(NonfungiblePositionManagerABI);
+    this._contractMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, contractInterface);
+
+    eventSignatures = Object.values(contractInterface.events).map(value => {
+      return contractInterface.getEventTopic(value);
+    });
+    this._eventSignaturesMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, eventSignatures);
 
     assert(PoolABI);
     this._abiMap.set(KIND_POOL, PoolABI);
-    this._contractMap.set(KIND_POOL, new ethers.utils.Interface(PoolABI));
+
+    contractInterface = new ethers.utils.Interface(PoolABI);
+    this._contractMap.set(KIND_POOL, contractInterface);
+
+    eventSignatures = Object.values(contractInterface.events).map(value => {
+      return contractInterface.getEventTopic(value);
+    });
+    this._eventSignaturesMap.set(KIND_POOL, eventSignatures);
 
     this._entityTypesMap = new Map();
     this._populateEntityTypesMap();
@@ -505,7 +530,7 @@ export class Indexer implements IndexerInterface {
   }
 
   async fetchEventsAndSaveBlocks (blocks: DeepPartial<BlockProgress>[]): Promise<{ blockProgress: BlockProgress, events: DeepPartial<Event>[] }[]> {
-    return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this.parseEventNameAndArgs.bind(this));
+    return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
   async saveBlockAndFetchEvents (block: DeepPartial<BlockProgress>): Promise<[BlockProgress, DeepPartial<Event>[]]> {
@@ -1299,7 +1324,7 @@ export class Indexer implements IndexerInterface {
     assert(blockHash);
     assert(blockNumber);
 
-    const dbEvents = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this.parseEventNameAndArgs.bind(this));
+    const dbEvents = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
 
     const dbTx = await this._db.createTransactionRunner();
     try {
