@@ -21,8 +21,11 @@
   # Interval in number of blocks at which to clear entities cache.
   clearEntitiesCacheInterval = 1000
 
-  # Boolean to filter logs by contract.
-  filterLogs = false
+  # Boolean to filter logs by contracts.
+  filterLogsByAddresses = false
+
+  # Boolean to filter logs by topics.
+  filterLogsByTopics = false
 
   # Max block range for which to return events in eventsInRange GQL query.
   # Use -1 for skipping check on block range.
