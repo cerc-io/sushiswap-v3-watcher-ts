@@ -1,0 +1,34 @@
+query tokenHourData($id: ID!, $block: Block_height){
+    tokenHourData(id: $id, block: $block){
+        id
+        periodStartUnix
+        token{
+            id
+            symbol
+            name
+            decimals
+            totalSupply
+            volume
+            volumeUSD
+            untrackedVolumeUSD
+            feesUSD
+            txCount
+            poolCount
+            totalValueLocked
+            totalValueLockedUSD
+            totalValueLockedUSDUntracked
+            derivedETH
+        }
+        volume
+        volumeUSD
+        untrackedVolumeUSD
+        totalValueLocked
+        totalValueLockedUSD
+        priceUSD
+        feesUSD
+        open
+        high
+        low
+        close
+    }
+}

@@ -1,0 +1,17 @@
+query factory($id: ID!, $block: Block_height){
+    factory(id: $id, block: $block){
+        id
+        poolCount
+        txCount
+        totalVolumeUSD
+        totalVolumeETH
+        totalFeesUSD
+        totalFeesETH
+        untrackedVolumeUSD
+        totalValueLockedUSD
+        totalValueLockedETH
+        totalValueLockedUSDUntracked
+        totalValueLockedETHUntracked
+        owner
+    }
+}

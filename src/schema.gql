@@ -1,0 +1,614 @@
+directive @cacheControl(maxAge: Int, inheritMaxAge: Boolean, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+scalar BigInt
+
+scalar BigDecimal
+
+scalar Bytes
+
+type Proof {
+  data: String!
+}
+
+type _Block_ {
+  cid: String!
+  hash: String!
+  number: Int!
+  timestamp: Int!
+  parentHash: String!
+}
+
+type _Transaction_ {
+  hash: String!
+  index: Int!
+  from: String!
+  to: String!
+}
+
+type ResultEvent {
+  block: _Block_!
+  tx: _Transaction_!
+  contract: String!
+  eventIndex: Int!
+  event: Event!
+  proof: Proof
+}
+
+union Event = FeeAmountEnabledEvent | OwnerChangedEvent | PoolCreatedEvent | ApprovalEvent | ApprovalForAllEvent | CollectEvent | DecreaseLiquidityEvent | IncreaseLiquidityEvent | TransferEvent | BurnEvent | CollectProtocolEvent | FlashEvent | IncreaseObservationCardinalityNextEvent | InitializeEvent | MintEvent | SetFeeProtocolEvent | SwapEvent
+
+type FeeAmountEnabledEvent {
+  fee: Int!
+  tickSpacing: Int!
+}
+
+type OwnerChangedEvent {
+  oldOwner: String!
+  newOwner: String!
+}
+
+type PoolCreatedEvent {
+  token0: String!
+  token1: String!
+  fee: Int!
+  tickSpacing: Int!
+  pool: String!
+}
+
+type ApprovalEvent {
+  owner: String!
+  approved: String!
+  tokenId: BigInt!
+}
+
+type ApprovalForAllEvent {
+  owner: String!
+  operator: String!
+  approved: Boolean!
+}
+
+type CollectEvent {
+  tokenId: BigInt
+  recipient: String!
+  amount0: BigInt!
+  amount1: BigInt!
+  owner: String
+  tickLower: Int
+  tickUpper: Int
+}
+
+type DecreaseLiquidityEvent {
+  tokenId: BigInt!
+  liquidity: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+}
+
+type IncreaseLiquidityEvent {
+  tokenId: BigInt!
+  liquidity: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+}
+
+type TransferEvent {
+  from: String!
+  to: String!
+  tokenId: BigInt!
+}
+
+type BurnEvent {
+  owner: String!
+  tickLower: Int!
+  tickUpper: Int!
+  amount: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+}
+
+type CollectProtocolEvent {
+  sender: String!
+  recipient: String!
+  amount0: BigInt!
+  amount1: BigInt!
+}
+
+type FlashEvent {
+  sender: String!
+  recipient: String!
+  amount0: BigInt!
+  amount1: BigInt!
+  paid0: BigInt!
+  paid1: BigInt!
+}
+
+type IncreaseObservationCardinalityNextEvent {
+  observationCardinalityNextOld: Int!
+  observationCardinalityNextNew: Int!
+}
+
+type InitializeEvent {
+  sqrtPriceX96: BigInt!
+  tick: Int!
+}
+
+type MintEvent {
+  sender: String!
+  owner: String!
+  tickLower: Int!
+  tickUpper: Int!
+  amount: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+}
+
+type SetFeeProtocolEvent {
+  feeProtocol0Old: Int!
+  feeProtocol1Old: Int!
+  feeProtocol0New: Int!
+  feeProtocol1New: Int!
+}
+
+type SwapEvent {
+  sender: String!
+  recipient: String!
+  amount0: BigInt!
+  amount1: BigInt!
+  sqrtPriceX96: BigInt!
+  liquidity: BigInt!
+  tick: Int!
+}
+
+input Block_height {
+  hash: Bytes
+  number: Int
+}
+
+type SyncStatus {
+  latestIndexedBlockHash: String!
+  latestIndexedBlockNumber: Int!
+  latestCanonicalBlockHash: String!
+  latestCanonicalBlockNumber: Int!
+}
+
+type ResultState {
+  block: _Block_!
+  contractAddress: String!
+  cid: String!
+  kind: String!
+  data: String!
+}
+
+type Query {
+  events(blockHash: String!, contractAddress: String!, name: String): [ResultEvent!]
+  eventsInRange(fromBlockNumber: Int!, toBlockNumber: Int!): [ResultEvent!]
+  factory(id: ID!, block: Block_height): Factory!
+  bundle(id: ID!, block: Block_height): Bundle!
+  token(id: ID!, block: Block_height): Token!
+  pool(id: ID!, block: Block_height): Pool!
+  tick(id: ID!, block: Block_height): Tick!
+  position(id: ID!, block: Block_height): Position!
+  positionSnapshot(id: ID!, block: Block_height): PositionSnapshot!
+  transaction(id: ID!, block: Block_height): Transaction!
+  mint(id: ID!, block: Block_height): Mint!
+  burn(id: ID!, block: Block_height): Burn!
+  swap(id: ID!, block: Block_height): Swap!
+  collect(id: ID!, block: Block_height): Collect!
+  flash(id: ID!, block: Block_height): Flash!
+  uniswapDayData(id: ID!, block: Block_height): UniswapDayData!
+  poolDayData(id: ID!, block: Block_height): PoolDayData!
+  poolHourData(id: ID!, block: Block_height): PoolHourData!
+  tickHourData(id: ID!, block: Block_height): TickHourData!
+  tickDayData(id: ID!, block: Block_height): TickDayData!
+  tokenDayData(id: ID!, block: Block_height): TokenDayData!
+  tokenHourData(id: ID!, block: Block_height): TokenHourData!
+  increaseEvent(id: ID!, block: Block_height): IncreaseEvent!
+  decreaseEvent(id: ID!, block: Block_height): DecreaseEvent!
+  getSyncStatus: SyncStatus
+  getStateByCID(cid: String!): ResultState
+  getState(blockHash: String!, contractAddress: String!, kind: String): ResultState
+}
+
+type Factory {
+  id: ID!
+  poolCount: BigInt!
+  txCount: BigInt!
+  totalVolumeUSD: BigDecimal!
+  totalVolumeETH: BigDecimal!
+  totalFeesUSD: BigDecimal!
+  totalFeesETH: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  totalValueLockedUSD: BigDecimal!
+  totalValueLockedETH: BigDecimal!
+  totalValueLockedUSDUntracked: BigDecimal!
+  totalValueLockedETHUntracked: BigDecimal!
+  owner: ID!
+}
+
+type Bundle {
+  id: ID!
+  ethPriceUSD: BigDecimal!
+}
+
+type Token {
+  id: ID!
+  symbol: String!
+  name: String!
+  decimals: BigInt!
+  totalSupply: BigInt!
+  volume: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  txCount: BigInt!
+  poolCount: BigInt!
+  totalValueLocked: BigDecimal!
+  totalValueLockedUSD: BigDecimal!
+  totalValueLockedUSDUntracked: BigDecimal!
+  derivedETH: BigDecimal!
+  whitelistPools: [Pool!]!
+  tokenDayData: [TokenDayData!]!
+}
+
+type Pool {
+  id: ID!
+  createdAtTimestamp: BigInt!
+  createdAtBlockNumber: BigInt!
+  token0: Token!
+  token1: Token!
+  feeTier: BigInt!
+  liquidity: BigInt!
+  sqrtPrice: BigInt!
+  feeGrowthGlobal0X128: BigInt!
+  feeGrowthGlobal1X128: BigInt!
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+  tick: BigInt
+  observationIndex: BigInt!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  txCount: BigInt!
+  collectedFeesToken0: BigDecimal!
+  collectedFeesToken1: BigDecimal!
+  collectedFeesUSD: BigDecimal!
+  totalValueLockedToken0: BigDecimal!
+  totalValueLockedToken1: BigDecimal!
+  totalValueLockedETH: BigDecimal!
+  totalValueLockedUSD: BigDecimal!
+  totalValueLockedUSDUntracked: BigDecimal!
+  liquidityProviderCount: BigInt!
+  poolHourData: [PoolHourData!]!
+  poolDayData: [PoolDayData!]!
+  mints: [Mint!]!
+  burns: [Burn!]!
+  swaps: [Swap!]!
+  collects: [Collect!]!
+  ticks: [Tick!]!
+}
+
+type PoolHourData {
+  id: ID!
+  periodStartUnix: Int!
+  pool: Pool!
+  liquidity: BigInt!
+  sqrtPrice: BigInt!
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+  tick: BigInt
+  feeGrowthGlobal0X128: BigInt!
+  feeGrowthGlobal1X128: BigInt!
+  tvlUSD: BigDecimal!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  txCount: BigInt!
+  open: BigDecimal!
+  high: BigDecimal!
+  low: BigDecimal!
+  close: BigDecimal!
+}
+
+type PoolDayData {
+  id: ID!
+  date: Int!
+  pool: Pool!
+  liquidity: BigInt!
+  sqrtPrice: BigInt!
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+  tick: BigInt
+  feeGrowthGlobal0X128: BigInt!
+  feeGrowthGlobal1X128: BigInt!
+  tvlUSD: BigDecimal!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  txCount: BigInt!
+  open: BigDecimal!
+  high: BigDecimal!
+  low: BigDecimal!
+  close: BigDecimal!
+}
+
+type Mint {
+  id: ID!
+  transaction: Transaction!
+  timestamp: BigInt!
+  pool: Pool!
+  token0: Token!
+  token1: Token!
+  owner: Bytes!
+  sender: Bytes
+  origin: Bytes!
+  amount: BigInt!
+  amount0: BigDecimal!
+  amount1: BigDecimal!
+  amountUSD: BigDecimal
+  tickLower: BigInt!
+  tickUpper: BigInt!
+  logIndex: BigInt
+}
+
+type Transaction {
+  id: ID!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+  mints: [Mint!]!
+  burns: [Burn!]!
+  swaps: [Swap!]!
+  flashed: [Flash!]!
+  collects: [Collect!]!
+}
+
+type Burn {
+  id: ID!
+  transaction: Transaction!
+  pool: Pool!
+  token0: Token!
+  token1: Token!
+  timestamp: BigInt!
+  owner: Bytes
+  origin: Bytes!
+  amount: BigInt!
+  amount0: BigDecimal!
+  amount1: BigDecimal!
+  amountUSD: BigDecimal
+  tickLower: BigInt!
+  tickUpper: BigInt!
+  logIndex: BigInt
+}
+
+type Swap {
+  id: ID!
+  transaction: Transaction!
+  timestamp: BigInt!
+  pool: Pool!
+  token0: Token!
+  token1: Token!
+  sender: Bytes!
+  recipient: Bytes!
+  origin: Bytes!
+  amount0: BigDecimal!
+  amount1: BigDecimal!
+  amountUSD: BigDecimal!
+  sqrtPriceX96: BigInt!
+  tick: BigInt!
+  logIndex: BigInt
+}
+
+type Flash {
+  id: ID!
+  transaction: Transaction!
+  timestamp: BigInt!
+  pool: Pool!
+  sender: Bytes!
+  recipient: Bytes!
+  amount0: BigDecimal!
+  amount1: BigDecimal!
+  amountUSD: BigDecimal!
+  amount0Paid: BigDecimal!
+  amount1Paid: BigDecimal!
+  logIndex: BigInt
+}
+
+type Collect {
+  id: ID!
+  transaction: Transaction!
+  timestamp: BigInt!
+  pool: Pool!
+  owner: Bytes
+  amount0: BigDecimal!
+  amount1: BigDecimal!
+  amountUSD: BigDecimal
+  tickLower: BigInt!
+  tickUpper: BigInt!
+  logIndex: BigInt
+}
+
+type Tick {
+  id: ID!
+  poolAddress: String
+  tickIdx: BigInt!
+  pool: Pool!
+  liquidityGross: BigInt!
+  liquidityNet: BigInt!
+  price0: BigDecimal!
+  price1: BigDecimal!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  collectedFeesToken0: BigDecimal!
+  collectedFeesToken1: BigDecimal!
+  collectedFeesUSD: BigDecimal!
+  createdAtTimestamp: BigInt!
+  createdAtBlockNumber: BigInt!
+  liquidityProviderCount: BigInt!
+  feeGrowthOutside0X128: BigInt!
+  feeGrowthOutside1X128: BigInt!
+}
+
+type TokenDayData {
+  id: ID!
+  date: Int!
+  token: Token!
+  volume: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  totalValueLocked: BigDecimal!
+  totalValueLockedUSD: BigDecimal!
+  priceUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  open: BigDecimal!
+  high: BigDecimal!
+  low: BigDecimal!
+  close: BigDecimal!
+}
+
+type Position {
+  id: ID!
+  owner: Bytes!
+  pool: Pool!
+  token0: Token!
+  token1: Token!
+  tickLower: Tick!
+  tickUpper: Tick!
+  liquidity: BigInt!
+  depositedToken0: BigDecimal!
+  depositedToken1: BigDecimal!
+  withdrawnToken0: BigDecimal!
+  withdrawnToken1: BigDecimal!
+  collectedToken0: BigDecimal!
+  collectedToken1: BigDecimal!
+  collectedFeesToken0: BigDecimal!
+  collectedFeesToken1: BigDecimal!
+  amountDepositedUSD: BigDecimal!
+  amountWithdrawnUSD: BigDecimal!
+  amountCollectedUSD: BigDecimal!
+  transaction: Transaction!
+  feeGrowthInside0LastX128: BigInt!
+  feeGrowthInside1LastX128: BigInt!
+  increaseEvents: [IncreaseEvent!]!
+  decreaseEvents: [IncreaseEvent!]!
+}
+
+type IncreaseEvent {
+  id: ID!
+  pool: Pool!
+  tokenID: BigInt!
+  position: Position!
+  amount0: BigInt!
+  amount1: BigInt!
+  token0: Token!
+  token1: Token!
+  timeStamp: BigInt!
+  transaction: Transaction!
+}
+
+type PositionSnapshot {
+  id: ID!
+  owner: Bytes!
+  pool: Pool!
+  position: Position!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  liquidity: BigInt!
+  depositedToken0: BigDecimal!
+  depositedToken1: BigDecimal!
+  withdrawnToken0: BigDecimal!
+  withdrawnToken1: BigDecimal!
+  collectedFeesToken0: BigDecimal!
+  collectedFeesToken1: BigDecimal!
+  transaction: Transaction!
+  feeGrowthInside0LastX128: BigInt!
+  feeGrowthInside1LastX128: BigInt!
+}
+
+type UniswapDayData {
+  id: ID!
+  date: Int!
+  volumeETH: BigDecimal!
+  volumeUSD: BigDecimal!
+  volumeUSDUntracked: BigDecimal!
+  feesUSD: BigDecimal!
+  txCount: BigInt!
+  tvlUSD: BigDecimal!
+}
+
+type TickHourData {
+  id: ID!
+  periodStartUnix: Int!
+  pool: Pool!
+  tick: Tick!
+  liquidityGross: BigInt!
+  liquidityNet: BigInt!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+}
+
+type TickDayData {
+  id: ID!
+  date: Int!
+  pool: Pool!
+  tick: Tick!
+  liquidityGross: BigInt!
+  liquidityNet: BigInt!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  feeGrowthOutside0X128: BigInt!
+  feeGrowthOutside1X128: BigInt!
+}
+
+type TokenHourData {
+  id: ID!
+  periodStartUnix: Int!
+  token: Token!
+  volume: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  totalValueLocked: BigDecimal!
+  totalValueLockedUSD: BigDecimal!
+  priceUSD: BigDecimal!
+  feesUSD: BigDecimal!
+  open: BigDecimal!
+  high: BigDecimal!
+  low: BigDecimal!
+  close: BigDecimal!
+}
+
+type DecreaseEvent {
+  id: ID!
+  pool: Pool!
+  tokenID: BigInt!
+  position: Position!
+  amount0: BigInt!
+  amount1: BigInt!
+  token0: Token!
+  token1: Token!
+  timeStamp: BigInt!
+  transaction: Transaction!
+}
+
+type Mutation {
+  watchContract(address: String!, kind: String!, checkpoint: Boolean!, startingBlock: Int): Boolean!
+}
+
+type Subscription {
+  onEvent: ResultEvent!
+}

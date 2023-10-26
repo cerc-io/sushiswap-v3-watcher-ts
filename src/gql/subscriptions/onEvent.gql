@@ -1,0 +1,129 @@
+subscription onEvent{
+    onEvent{
+        block{
+            cid
+            hash
+            number
+            timestamp
+            parentHash
+        }
+        tx{
+            hash
+            index
+            from
+            to
+        }
+        contract
+        eventIndex
+        event{
+            ... on FeeAmountEnabledEvent {
+                fee
+                tickSpacing
+            }
+            ... on OwnerChangedEvent {
+                oldOwner
+                newOwner
+            }
+            ... on PoolCreatedEvent {
+                token0
+                token1
+                fee
+                tickSpacing
+                pool
+            }
+            ... on ApprovalEvent {
+                owner
+                approved
+                tokenId
+            }
+            ... on ApprovalForAllEvent {
+                owner
+                operator
+                approved
+            }
+            ... on CollectEvent {
+                tokenId
+                recipient
+                amount0
+                amount1
+                owner
+                tickLower
+                tickUpper
+            }
+            ... on DecreaseLiquidityEvent {
+                tokenId
+                liquidity
+                amount0
+                amount1
+            }
+            ... on IncreaseLiquidityEvent {
+                tokenId
+                liquidity
+                amount0
+                amount1
+            }
+            ... on TransferEvent {
+                from
+                to
+                tokenId
+            }
+            ... on BurnEvent {
+                owner
+                tickLower
+                tickUpper
+                amount
+                amount0
+                amount1
+            }
+            ... on CollectProtocolEvent {
+                sender
+                recipient
+                amount0
+                amount1
+            }
+            ... on FlashEvent {
+                sender
+                recipient
+                amount0
+                amount1
+                paid0
+                paid1
+            }
+            ... on IncreaseObservationCardinalityNextEvent {
+                observationCardinalityNextOld
+                observationCardinalityNextNew
+            }
+            ... on InitializeEvent {
+                sqrtPriceX96
+                tick
+            }
+            ... on MintEvent {
+                sender
+                owner
+                tickLower
+                tickUpper
+                amount
+                amount0
+                amount1
+            }
+            ... on SetFeeProtocolEvent {
+                feeProtocol0Old
+                feeProtocol1Old
+                feeProtocol0New
+                feeProtocol1New
+            }
+            ... on SwapEvent {
+                sender
+                recipient
+                amount0
+                amount1
+                sqrtPriceX96
+                liquidity
+                tick
+            }
+        }
+        proof{
+            data
+        }
+    }
+}
