@@ -11,7 +11,7 @@
 
   # Enable state creation
   # CAUTION: Disable only if state creation is not desired or can be filled subsequently
-  enableState = true
+  enableState = false
 
   subgraphPath = "./subgraph-build"
 
@@ -29,7 +29,7 @@
   maxEventsBlockRange = 1000
 
   # Flag to specify whether RPC endpoint supports block hash as block tag parameter
-  rpcSupportsBlockHashParam = true
+  rpcSupportsBlockHashParam = false
 
   # GQL cache settings
   [server.gqlCache]
@@ -60,11 +60,11 @@
 
 [upstream]
   [upstream.ethServer]
-    gqlApiEndpoint = "http://127.0.0.1:8082/graphql"
+    # gqlApiEndpoint = "http://127.0.0.1:8082/graphql"
     rpcProviderEndpoint = "http://127.0.0.1:8081"
 
     # Flag to specify if rpc-eth-client should be used from RPC endpoint instead of ipld-eth-client (ipld-eth-server GQL client)
-    rpcClient = false
+    rpcClient = true
 
   [upstream.cache]
     name = "requests"
