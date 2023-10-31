@@ -168,6 +168,387 @@ input Block_height {
   number: Int
 }
 
+enum OrderDirection {
+  asc
+  desc
+}
+
+enum Factory_orderBy {
+  id
+  poolCount
+  txCount
+  totalVolumeUSD
+  totalVolumeETH
+  totalFeesUSD
+  totalFeesETH
+  untrackedVolumeUSD
+  totalValueLockedUSD
+  totalValueLockedETH
+  totalValueLockedUSDUntracked
+  totalValueLockedETHUntracked
+  owner
+}
+
+enum Bundle_orderBy {
+  id
+  ethPriceUSD
+}
+
+enum Token_orderBy {
+  id
+  symbol
+  name
+  decimals
+  totalSupply
+  volume
+  volumeUSD
+  untrackedVolumeUSD
+  feesUSD
+  txCount
+  poolCount
+  totalValueLocked
+  totalValueLockedUSD
+  totalValueLockedUSDUntracked
+  derivedETH
+}
+
+enum Pool_orderBy {
+  id
+  createdAtTimestamp
+  createdAtBlockNumber
+  token0 # TODO: Implement nested sorting
+  token1
+  feeTier
+  liquidity
+  sqrtPrice
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  token0Price
+  token1Price
+  tick
+  observationIndex
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  untrackedVolumeUSD
+  feesUSD
+  txCount
+  collectedFeesToken0
+  collectedFeesToken1
+  collectedFeesUSD
+  totalValueLockedToken0
+  totalValueLockedToken1
+  totalValueLockedETH
+  totalValueLockedUSD
+  totalValueLockedUSDUntracked
+  liquidityProviderCount
+}
+
+enum Tick_orderBy {
+  id
+  poolAddress
+  tickIdx
+  pool
+  liquidityGross
+  liquidityNet
+  price0
+  price1
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  untrackedVolumeUSD
+  feesUSD
+  collectedFeesToken0
+  collectedFeesToken1
+  collectedFeesUSD
+  createdAtTimestamp
+  createdAtBlockNumber
+  liquidityProviderCount
+  feeGrowthOutside0X128
+  feeGrowthOutside1X128
+}
+
+enum Position_orderBy {
+  id
+  owner
+  pool
+  token0
+  token1
+  tickLower
+  tickUpper
+  liquidity
+  depositedToken0
+  depositedToken1
+  withdrawnToken0
+  withdrawnToken1
+  collectedToken0
+  collectedToken1
+  collectedFeesToken0
+  collectedFeesToken1
+  amountDepositedUSD
+  amountWithdrawnUSD
+  amountCollectedUSD
+  transaction
+  feeGrowthInside0LastX128
+  feeGrowthInside1LastX128
+}
+
+enum PositionSnapshot_orderBy {
+  id
+  owner
+  pool
+  position
+  blockNumber
+  timestamp
+  liquidity
+  depositedToken0
+  depositedToken1
+  withdrawnToken0
+  withdrawnToken1
+  collectedFeesToken0
+  collectedFeesToken1
+  transaction
+  feeGrowthInside0LastX128
+  feeGrowthInside1LastX128
+}
+
+enum Transaction_orderBy {
+  id
+  blockNumber
+  timestamp
+  gasUsed
+  gasPrice
+}
+
+enum Mint_orderBy {
+  id
+  transaction
+  timestamp
+  pool
+  token0
+  token1
+  owner
+  sender
+  origin
+  amount
+  amount0
+  amount1
+  amountUSD
+  tickLower
+  tickUpper
+  logIndex
+}
+
+enum Burn_orderBy {
+  id
+  transaction
+  pool
+  token0
+  token1
+  timestamp
+  owner
+  origin
+  amount
+  amount0
+  amount1
+  amountUSD
+  tickLower
+  tickUpper
+  logIndex
+}
+
+enum Swap_orderBy {
+  id
+  transaction
+  timestamp
+  pool
+  token0
+  token1
+  sender
+  recipient
+  origin
+  amount0
+  amount1
+  amountUSD
+  sqrtPriceX96
+  tick
+  logIndex
+}
+
+enum Collect_orderBy {
+  id
+  transaction
+  timestamp
+  pool
+  owner
+  amount0
+  amount1
+  amountUSD
+  tickLower
+  tickUpper
+  logIndex
+}
+
+enum Flash_orderBy {
+  id
+  transaction
+  timestamp
+  pool
+  sender
+  recipient
+  amount0
+  amount1
+  amountUSD
+  amount0Paid
+  amount1Paid
+  logIndex
+}
+
+enum UniswapDayData_orderBy {
+  id
+  date
+  volumeETH
+  volumeUSD
+  volumeUSDUntracked
+  feesUSD
+  txCount
+  tvlUSD
+}
+
+enum PoolDayData_orderBy {
+  id
+  date
+  pool
+  liquidity
+  sqrtPrice
+  token0Price
+  token1Price
+  tick
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  tvlUSD
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  txCount
+  open
+  high
+  low
+  close
+}
+
+enum PoolHourData_orderBy {
+  id
+  periodStartUnix
+  pool
+  liquidity
+  sqrtPrice
+  token0Price
+  token1Price
+  tick
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  tvlUSD
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  txCount
+  open
+  high
+  low
+  close
+}
+
+enum TickHourData_orderBy {
+  id
+  periodStartUnix
+  pool
+  tick
+  liquidityGross
+  liquidityNet
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+}
+
+enum TickDayData_orderBy {
+  id
+  date
+  pool
+  tick
+  liquidityGross
+  liquidityNet
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  feeGrowthOutside0X128
+  feeGrowthOutside1X128
+}
+
+enum TokenDayData_orderBy {
+  id
+  date
+  token
+  volume
+  volumeUSD
+  untrackedVolumeUSD
+  totalValueLocked
+  totalValueLockedUSD
+  priceUSD
+  feesUSD
+  open
+  high
+  low
+  close
+}
+
+enum TokenHourData_orderBy {
+  id
+  periodStartUnix
+  token
+  volume
+  volumeUSD
+  untrackedVolumeUSD
+  totalValueLocked
+  totalValueLockedUSD
+  priceUSD
+  feesUSD
+  open
+  high
+  low
+  close
+}
+
+enum IncreaseEvent_orderBy {
+  id
+  pool
+  tokenID
+  position
+  amount0
+  amount1
+  token0
+  token1
+  timeStamp
+  transaction
+}
+
+enum DecreaseEvent_orderBy {
+  id
+  pool
+  tokenID
+  position
+  amount0
+  amount1
+  token0
+  token1
+  timeStamp
+  transaction
+}
+
 type SyncStatus {
   latestIndexedBlockHash: String!
   latestIndexedBlockNumber: Int!
@@ -187,27 +568,49 @@ type Query {
   events(blockHash: String!, contractAddress: String!, name: String): [ResultEvent!]
   eventsInRange(fromBlockNumber: Int!, toBlockNumber: Int!): [ResultEvent!]
   factory(id: ID!, block: Block_height): Factory!
+  factories(block: Block_height, where: Factory_filter, orderBy: Factory_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Factory!]!
   bundle(id: ID!, block: Block_height): Bundle!
+  bundles(block: Block_height, where: Bundle_filter, orderBy: Bundle_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Bundle!]!
   token(id: ID!, block: Block_height): Token!
+  tokens(block: Block_height, where: Token_filter, orderBy: Token_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Token!]!
   pool(id: ID!, block: Block_height): Pool!
+  pools(block: Block_height, where: Pool_filter, orderBy: Pool_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Pool!]!
   tick(id: ID!, block: Block_height): Tick!
+  ticks(block: Block_height, where: Tick_filter, orderBy: Tick_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Tick!]!
   position(id: ID!, block: Block_height): Position!
+  positions(block: Block_height, where: Position_filter, orderBy: Position_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Position!]!
   positionSnapshot(id: ID!, block: Block_height): PositionSnapshot!
+  positionSnapshots(block: Block_height, where: PositionSnapshot_filter, orderBy: PositionSnapshot_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PositionSnapshot!]!
   transaction(id: ID!, block: Block_height): Transaction!
+  transactions(block: Block_height, where: Transaction_filter, orderBy: Transaction_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Transaction!]!
   mint(id: ID!, block: Block_height): Mint!
+  mints(block: Block_height, where: Mint_filter, orderBy: Mint_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Mint!]!
   burn(id: ID!, block: Block_height): Burn!
+  burns(block: Block_height, where: Burn_filter, orderBy: Burn_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Burn!]!
   swap(id: ID!, block: Block_height): Swap!
+  swaps(block: Block_height, where: Swap_filter, orderBy: Swap_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Swap!]!
   collect(id: ID!, block: Block_height): Collect!
+  collects(block: Block_height, where: Collect_filter, orderBy: Collect_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Collect!]!
   flash(id: ID!, block: Block_height): Flash!
+  flashes(block: Block_height, where: Flash_filter, orderBy: Flash_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Flash!]!
   uniswapDayData(id: ID!, block: Block_height): UniswapDayData!
+  uniswapDayDatas(block: Block_height, where: UniswapDayData_filter, orderBy: UniswapDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [UniswapDayData!]!
   poolDayData(id: ID!, block: Block_height): PoolDayData!
+  poolDayDatas(block: Block_height, where: PoolDayData_filter, orderBy: PoolDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PoolDayData!]!
   poolHourData(id: ID!, block: Block_height): PoolHourData!
+  poolHourDatas(block: Block_height, where: PoolHourData_filter, orderBy: PoolHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PoolHourData!]!
   tickHourData(id: ID!, block: Block_height): TickHourData!
+  tickHourDatas(block: Block_height, where: TickHourData_filter, orderBy: TickHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TickHourData!]!
   tickDayData(id: ID!, block: Block_height): TickDayData!
+  tickDayDatas(block: Block_height, where: TickDayData_filter, orderBy: TickDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TickDayData!]!
   tokenDayData(id: ID!, block: Block_height): TokenDayData!
+  tokenDayDatas(block: Block_height, where: TokenDayData_filter, orderBy: TokenDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TokenDayData!]!
   tokenHourData(id: ID!, block: Block_height): TokenHourData!
+  tokenHourDatas(block: Block_height, where: TokenHourData_filter, orderBy: TokenHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TokenHourData!]!
   increaseEvent(id: ID!, block: Block_height): IncreaseEvent!
+  increaseEvents(block: Block_height, where: IncreaseEvent_filter, orderBy: IncreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [IncreaseEvent!]!
   decreaseEvent(id: ID!, block: Block_height): DecreaseEvent!
+  decreaseEvents(block: Block_height, where: DecreaseEvent_filter, orderBy: DecreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [DecreaseEvent!]!
   getSyncStatus: SyncStatus
   getStateByCID(cid: String!): ResultState
   getState(blockHash: String!, contractAddress: String!, kind: String): ResultState
@@ -229,9 +632,135 @@ type Factory {
   owner: ID!
 }
 
+input Factory_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  poolCount: BigInt
+  poolCount_not: BigInt
+  poolCount_gt: BigInt
+  poolCount_lt: BigInt
+  poolCount_gte: BigInt
+  poolCount_lte: BigInt
+  poolCount_in: [BigInt!]
+  poolCount_not_in: [BigInt!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  totalVolumeUSD: BigDecimal
+  totalVolumeUSD_not: BigDecimal
+  totalVolumeUSD_gt: BigDecimal
+  totalVolumeUSD_lt: BigDecimal
+  totalVolumeUSD_gte: BigDecimal
+  totalVolumeUSD_lte: BigDecimal
+  totalVolumeUSD_in: [BigDecimal!]
+  totalVolumeUSD_not_in: [BigDecimal!]
+  totalVolumeETH: BigDecimal
+  totalVolumeETH_not: BigDecimal
+  totalVolumeETH_gt: BigDecimal
+  totalVolumeETH_lt: BigDecimal
+  totalVolumeETH_gte: BigDecimal
+  totalVolumeETH_lte: BigDecimal
+  totalVolumeETH_in: [BigDecimal!]
+  totalVolumeETH_not_in: [BigDecimal!]
+  totalFeesUSD: BigDecimal
+  totalFeesUSD_not: BigDecimal
+  totalFeesUSD_gt: BigDecimal
+  totalFeesUSD_lt: BigDecimal
+  totalFeesUSD_gte: BigDecimal
+  totalFeesUSD_lte: BigDecimal
+  totalFeesUSD_in: [BigDecimal!]
+  totalFeesUSD_not_in: [BigDecimal!]
+  totalFeesETH: BigDecimal
+  totalFeesETH_not: BigDecimal
+  totalFeesETH_gt: BigDecimal
+  totalFeesETH_lt: BigDecimal
+  totalFeesETH_gte: BigDecimal
+  totalFeesETH_lte: BigDecimal
+  totalFeesETH_in: [BigDecimal!]
+  totalFeesETH_not_in: [BigDecimal!]
+  untrackedVolumeUSD: BigDecimal
+  untrackedVolumeUSD_not: BigDecimal
+  untrackedVolumeUSD_gt: BigDecimal
+  untrackedVolumeUSD_lt: BigDecimal
+  untrackedVolumeUSD_gte: BigDecimal
+  untrackedVolumeUSD_lte: BigDecimal
+  untrackedVolumeUSD_in: [BigDecimal!]
+  untrackedVolumeUSD_not_in: [BigDecimal!]
+  totalValueLockedUSD: BigDecimal
+  totalValueLockedUSD_not: BigDecimal
+  totalValueLockedUSD_gt: BigDecimal
+  totalValueLockedUSD_lt: BigDecimal
+  totalValueLockedUSD_gte: BigDecimal
+  totalValueLockedUSD_lte: BigDecimal
+  totalValueLockedUSD_in: [BigDecimal!]
+  totalValueLockedUSD_not_in: [BigDecimal!]
+  totalValueLockedETH: BigDecimal
+  totalValueLockedETH_not: BigDecimal
+  totalValueLockedETH_gt: BigDecimal
+  totalValueLockedETH_lt: BigDecimal
+  totalValueLockedETH_gte: BigDecimal
+  totalValueLockedETH_lte: BigDecimal
+  totalValueLockedETH_in: [BigDecimal!]
+  totalValueLockedETH_not_in: [BigDecimal!]
+  totalValueLockedUSDUntracked: BigDecimal
+  totalValueLockedUSDUntracked_not: BigDecimal
+  totalValueLockedUSDUntracked_gt: BigDecimal
+  totalValueLockedUSDUntracked_lt: BigDecimal
+  totalValueLockedUSDUntracked_gte: BigDecimal
+  totalValueLockedUSDUntracked_lte: BigDecimal
+  totalValueLockedUSDUntracked_in: [BigDecimal!]
+  totalValueLockedUSDUntracked_not_in: [BigDecimal!]
+  totalValueLockedETHUntracked: BigDecimal
+  totalValueLockedETHUntracked_not: BigDecimal
+  totalValueLockedETHUntracked_gt: BigDecimal
+  totalValueLockedETHUntracked_lt: BigDecimal
+  totalValueLockedETHUntracked_gte: BigDecimal
+  totalValueLockedETHUntracked_lte: BigDecimal
+  totalValueLockedETHUntracked_in: [BigDecimal!]
+  totalValueLockedETHUntracked_not_in: [BigDecimal!]
+  owner: ID
+  owner_not: ID
+  owner_gt: ID
+  owner_lt: ID
+  owner_gte: ID
+  owner_lte: ID
+  owner_in: [ID!]
+  owner_not_in: [ID!]
+}
+
 type Bundle {
   id: ID!
   ethPriceUSD: BigDecimal!
+}
+
+input Bundle_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  ethPriceUSD: BigDecimal
+  ethPriceUSD_not: BigDecimal
+  ethPriceUSD_gt: BigDecimal
+  ethPriceUSD_lt: BigDecimal
+  ethPriceUSD_gte: BigDecimal
+  ethPriceUSD_lte: BigDecimal
+  ethPriceUSD_in: [BigDecimal!]
+  ethPriceUSD_not_in: [BigDecimal!]
 }
 
 type Token {
@@ -252,6 +781,153 @@ type Token {
   derivedETH: BigDecimal!
   whitelistPools: [Pool!]!
   tokenDayData: [TokenDayData!]!
+}
+
+input Token_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  symbol: String
+  symbol_not: String
+  symbol_gt: String
+  symbol_lt: String
+  symbol_gte: String
+  symbol_lte: String
+  symbol_in: [String!]
+  symbol_not_in: [String!]
+  symbol_contains: String
+  symbol_contains_nocase: String
+  symbol_not_contains: String
+  symbol_not_contains_nocase: String
+  symbol_starts_with: String
+  symbol_starts_with_nocase: String
+  symbol_not_starts_with: String
+  symbol_not_starts_with_nocase: String
+  symbol_ends_with: String
+  symbol_ends_with_nocase: String
+  symbol_not_ends_with: String
+  symbol_not_ends_with_nocase: String
+  name: String
+  name_not: String
+  name_gt: String
+  name_lt: String
+  name_gte: String
+  name_lte: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_contains: String
+  name_contains_nocase: String
+  name_not_contains: String
+  name_not_contains_nocase: String
+  name_starts_with: String
+  name_starts_with_nocase: String
+  name_not_starts_with: String
+  name_not_starts_with_nocase: String
+  name_ends_with: String
+  name_ends_with_nocase: String
+  name_not_ends_with: String
+  name_not_ends_with_nocase: String
+  decimals: BigInt
+  decimals_not: BigInt
+  decimals_gt: BigInt
+  decimals_lt: BigInt
+  decimals_gte: BigInt
+  decimals_lte: BigInt
+  decimals_in: [BigInt!]
+  decimals_not_in: [BigInt!]
+  totalSupply: BigInt
+  totalSupply_not: BigInt
+  totalSupply_gt: BigInt
+  totalSupply_lt: BigInt
+  totalSupply_gte: BigInt
+  totalSupply_lte: BigInt
+  totalSupply_in: [BigInt!]
+  totalSupply_not_in: [BigInt!]
+  volume: BigDecimal
+  volume_not: BigDecimal
+  volume_gt: BigDecimal
+  volume_lt: BigDecimal
+  volume_gte: BigDecimal
+  volume_lte: BigDecimal
+  volume_in: [BigDecimal!]
+  volume_not_in: [BigDecimal!]
+  volumeUSD: BigDecimal
+  volumeUSD_not: BigDecimal
+  volumeUSD_gt: BigDecimal
+  volumeUSD_lt: BigDecimal
+  volumeUSD_gte: BigDecimal
+  volumeUSD_lte: BigDecimal
+  volumeUSD_in: [BigDecimal!]
+  volumeUSD_not_in: [BigDecimal!]
+  untrackedVolumeUSD: BigDecimal
+  untrackedVolumeUSD_not: BigDecimal
+  untrackedVolumeUSD_gt: BigDecimal
+  untrackedVolumeUSD_lt: BigDecimal
+  untrackedVolumeUSD_gte: BigDecimal
+  untrackedVolumeUSD_lte: BigDecimal
+  untrackedVolumeUSD_in: [BigDecimal!]
+  untrackedVolumeUSD_not_in: [BigDecimal!]
+  feesUSD: BigDecimal
+  feesUSD_not: BigDecimal
+  feesUSD_gt: BigDecimal
+  feesUSD_lt: BigDecimal
+  feesUSD_gte: BigDecimal
+  feesUSD_lte: BigDecimal
+  feesUSD_in: [BigDecimal!]
+  feesUSD_not_in: [BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  poolCount: BigInt
+  poolCount_not: BigInt
+  poolCount_gt: BigInt
+  poolCount_lt: BigInt
+  poolCount_gte: BigInt
+  poolCount_lte: BigInt
+  poolCount_in: [BigInt!]
+  poolCount_not_in: [BigInt!]
+  totalValueLocked: BigDecimal
+  totalValueLocked_not: BigDecimal
+  totalValueLocked_gt: BigDecimal
+  totalValueLocked_lt: BigDecimal
+  totalValueLocked_gte: BigDecimal
+  totalValueLocked_lte: BigDecimal
+  totalValueLocked_in: [BigDecimal!]
+  totalValueLocked_not_in: [BigDecimal!]
+  totalValueLockedUSD: BigDecimal
+  totalValueLockedUSD_not: BigDecimal
+  totalValueLockedUSD_gt: BigDecimal
+  totalValueLockedUSD_lt: BigDecimal
+  totalValueLockedUSD_gte: BigDecimal
+  totalValueLockedUSD_lte: BigDecimal
+  totalValueLockedUSD_in: [BigDecimal!]
+  totalValueLockedUSD_not_in: [BigDecimal!]
+  totalValueLockedUSDUntracked: BigDecimal
+  totalValueLockedUSDUntracked_not: BigDecimal
+  totalValueLockedUSDUntracked_gt: BigDecimal
+  totalValueLockedUSDUntracked_lt: BigDecimal
+  totalValueLockedUSDUntracked_gte: BigDecimal
+  totalValueLockedUSDUntracked_lte: BigDecimal
+  totalValueLockedUSDUntracked_in: [BigDecimal!]
+  totalValueLockedUSDUntracked_not_in: [BigDecimal!]
+  derivedETH: BigDecimal
+  derivedETH_not: BigDecimal
+  derivedETH_gt: BigDecimal
+  derivedETH_lt: BigDecimal
+  derivedETH_gte: BigDecimal
+  derivedETH_lte: BigDecimal
+  derivedETH_in: [BigDecimal!]
+  derivedETH_not_in: [BigDecimal!]
 }
 
 type Pool {
@@ -291,6 +967,265 @@ type Pool {
   swaps: [Swap!]!
   collects: [Collect!]!
   ticks: [Tick!]!
+}
+
+input Pool_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  createdAtTimestamp: BigInt
+  createdAtTimestamp_not: BigInt
+  createdAtTimestamp_gt: BigInt
+  createdAtTimestamp_lt: BigInt
+  createdAtTimestamp_gte: BigInt
+  createdAtTimestamp_lte: BigInt
+  createdAtTimestamp_in: [BigInt!]
+  createdAtTimestamp_not_in: [BigInt!]
+  createdAtBlockNumber: BigInt
+  createdAtBlockNumber_not: BigInt
+  createdAtBlockNumber_gt: BigInt
+  createdAtBlockNumber_lt: BigInt
+  createdAtBlockNumber_gte: BigInt
+  createdAtBlockNumber_lte: BigInt
+  createdAtBlockNumber_in: [BigInt!]
+  createdAtBlockNumber_not_in: [BigInt!]
+  token0: String
+  token0_not: String
+  token0_gt: String
+  token0_lt: String
+  token0_gte: String
+  token0_lte: String
+  token0_in: [String!]
+  token0_not_in: [String!]
+  token0_contains: String
+  token0_contains_nocase: String
+  token0_not_contains: String
+  token0_not_contains_nocase: String
+  token0_starts_with: String
+  token0_starts_with_nocase: String
+  token0_not_starts_with: String
+  token0_not_starts_with_nocase: String
+  token0_ends_with: String
+  token0_ends_with_nocase: String
+  token0_not_ends_with: String
+  token0_not_ends_with_nocase: String
+  token1: String
+  token1_not: String
+  token1_gt: String
+  token1_lt: String
+  token1_gte: String
+  token1_lte: String
+  token1_in: [String!]
+  token1_not_in: [String!]
+  token1_contains: String
+  token1_contains_nocase: String
+  token1_not_contains: String
+  token1_not_contains_nocase: String
+  token1_starts_with: String
+  token1_starts_with_nocase: String
+  token1_not_starts_with: String
+  token1_not_starts_with_nocase: String
+  token1_ends_with: String
+  token1_ends_with_nocase: String
+  token1_not_ends_with: String
+  token1_not_ends_with_nocase: String
+  feeTier: BigInt
+  feeTier_not: BigInt
+  feeTier_gt: BigInt
+  feeTier_lt: BigInt
+  feeTier_gte: BigInt
+  feeTier_lte: BigInt
+  feeTier_in: [BigInt!]
+  feeTier_not_in: [BigInt!]
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  sqrtPrice: BigInt
+  sqrtPrice_not: BigInt
+  sqrtPrice_gt: BigInt
+  sqrtPrice_lt: BigInt
+  sqrtPrice_gte: BigInt
+  sqrtPrice_lte: BigInt
+  sqrtPrice_in: [BigInt!]
+  sqrtPrice_not_in: [BigInt!]
+  feeGrowthGlobal0X128: BigInt
+  feeGrowthGlobal0X128_not: BigInt
+  feeGrowthGlobal0X128_gt: BigInt
+  feeGrowthGlobal0X128_lt: BigInt
+  feeGrowthGlobal0X128_gte: BigInt
+  feeGrowthGlobal0X128_lte: BigInt
+  feeGrowthGlobal0X128_in: [BigInt!]
+  feeGrowthGlobal0X128_not_in: [BigInt!]
+  feeGrowthGlobal1X128: BigInt
+  feeGrowthGlobal1X128_not: BigInt
+  feeGrowthGlobal1X128_gt: BigInt
+  feeGrowthGlobal1X128_lt: BigInt
+  feeGrowthGlobal1X128_gte: BigInt
+  feeGrowthGlobal1X128_lte: BigInt
+  feeGrowthGlobal1X128_in: [BigInt!]
+  feeGrowthGlobal1X128_not_in: [BigInt!]
+  token0Price: BigDecimal
+  token0Price_not: BigDecimal
+  token0Price_gt: BigDecimal
+  token0Price_lt: BigDecimal
+  token0Price_gte: BigDecimal
+  token0Price_lte: BigDecimal
+  token0Price_in: [BigDecimal!]
+  token0Price_not_in: [BigDecimal!]
+  token1Price: BigDecimal
+  token1Price_not: BigDecimal
+  token1Price_gt: BigDecimal
+  token1Price_lt: BigDecimal
+  token1Price_gte: BigDecimal
+  token1Price_lte: BigDecimal
+  token1Price_in: [BigDecimal!]
+  token1Price_not_in: [BigDecimal!]
+  tick: BigInt
+  tick_not: BigInt
+  tick_gt: BigInt
+  tick_lt: BigInt
+  tick_gte: BigInt
+  tick_lte: BigInt
+  tick_in: [BigInt!]
+  tick_not_in: [BigInt!]
+  observationIndex: BigInt
+  observationIndex_not: BigInt
+  observationIndex_gt: BigInt
+  observationIndex_lt: BigInt
+  observationIndex_gte: BigInt
+  observationIndex_lte: BigInt
+  observationIndex_in: [BigInt!]
+  observationIndex_not_in: [BigInt!]
+  volumeToken0: BigDecimal
+  volumeToken0_not: BigDecimal
+  volumeToken0_gt: BigDecimal
+  volumeToken0_lt: BigDecimal
+  volumeToken0_gte: BigDecimal
+  volumeToken0_lte: BigDecimal
+  volumeToken0_in: [BigDecimal!]
+  volumeToken0_not_in: [BigDecimal!]
+  volumeToken1: BigDecimal
+  volumeToken1_not: BigDecimal
+  volumeToken1_gt: BigDecimal
+  volumeToken1_lt: BigDecimal
+  volumeToken1_gte: BigDecimal
+  volumeToken1_lte: BigDecimal
+  volumeToken1_in: [BigDecimal!]
+  volumeToken1_not_in: [BigDecimal!]
+  volumeUSD: BigDecimal
+  volumeUSD_not: BigDecimal
+  volumeUSD_gt: BigDecimal
+  volumeUSD_lt: BigDecimal
+  volumeUSD_gte: BigDecimal
+  volumeUSD_lte: BigDecimal
+  volumeUSD_in: [BigDecimal!]
+  volumeUSD_not_in: [BigDecimal!]
+  untrackedVolumeUSD: BigDecimal
+  untrackedVolumeUSD_not: BigDecimal
+  untrackedVolumeUSD_gt: BigDecimal
+  untrackedVolumeUSD_lt: BigDecimal
+  untrackedVolumeUSD_gte: BigDecimal
+  untrackedVolumeUSD_lte: BigDecimal
+  untrackedVolumeUSD_in: [BigDecimal!]
+  untrackedVolumeUSD_not_in: [BigDecimal!]
+  feesUSD: BigDecimal
+  feesUSD_not: BigDecimal
+  feesUSD_gt: BigDecimal
+  feesUSD_lt: BigDecimal
+  feesUSD_gte: BigDecimal
+  feesUSD_lte: BigDecimal
+  feesUSD_in: [BigDecimal!]
+  feesUSD_not_in: [BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  collectedFeesToken0: BigDecimal
+  collectedFeesToken0_not: BigDecimal
+  collectedFeesToken0_gt: BigDecimal
+  collectedFeesToken0_lt: BigDecimal
+  collectedFeesToken0_gte: BigDecimal
+  collectedFeesToken0_lte: BigDecimal
+  collectedFeesToken0_in: [BigDecimal!]
+  collectedFeesToken0_not_in: [BigDecimal!]
+  collectedFeesToken1: BigDecimal
+  collectedFeesToken1_not: BigDecimal
+  collectedFeesToken1_gt: BigDecimal
+  collectedFeesToken1_lt: BigDecimal
+  collectedFeesToken1_gte: BigDecimal
+  collectedFeesToken1_lte: BigDecimal
+  collectedFeesToken1_in: [BigDecimal!]
+  collectedFeesToken1_not_in: [BigDecimal!]
+  collectedFeesUSD: BigDecimal
+  collectedFeesUSD_not: BigDecimal
+  collectedFeesUSD_gt: BigDecimal
+  collectedFeesUSD_lt: BigDecimal
+  collectedFeesUSD_gte: BigDecimal
+  collectedFeesUSD_lte: BigDecimal
+  collectedFeesUSD_in: [BigDecimal!]
+  collectedFeesUSD_not_in: [BigDecimal!]
+  totalValueLockedToken0: BigDecimal
+  totalValueLockedToken0_not: BigDecimal
+  totalValueLockedToken0_gt: BigDecimal
+  totalValueLockedToken0_lt: BigDecimal
+  totalValueLockedToken0_gte: BigDecimal
+  totalValueLockedToken0_lte: BigDecimal
+  totalValueLockedToken0_in: [BigDecimal!]
+  totalValueLockedToken0_not_in: [BigDecimal!]
+  totalValueLockedToken1: BigDecimal
+  totalValueLockedToken1_not: BigDecimal
+  totalValueLockedToken1_gt: BigDecimal
+  totalValueLockedToken1_lt: BigDecimal
+  totalValueLockedToken1_gte: BigDecimal
+  totalValueLockedToken1_lte: BigDecimal
+  totalValueLockedToken1_in: [BigDecimal!]
+  totalValueLockedToken1_not_in: [BigDecimal!]
+  totalValueLockedETH: BigDecimal
+  totalValueLockedETH_not: BigDecimal
+  totalValueLockedETH_gt: BigDecimal
+  totalValueLockedETH_lt: BigDecimal
+  totalValueLockedETH_gte: BigDecimal
+  totalValueLockedETH_lte: BigDecimal
+  totalValueLockedETH_in: [BigDecimal!]
+  totalValueLockedETH_not_in: [BigDecimal!]
+  totalValueLockedUSD: BigDecimal
+  totalValueLockedUSD_not: BigDecimal
+  totalValueLockedUSD_gt: BigDecimal
+  totalValueLockedUSD_lt: BigDecimal
+  totalValueLockedUSD_gte: BigDecimal
+  totalValueLockedUSD_lte: BigDecimal
+  totalValueLockedUSD_in: [BigDecimal!]
+  totalValueLockedUSD_not_in: [BigDecimal!]
+  totalValueLockedUSDUntracked: BigDecimal
+  totalValueLockedUSDUntracked_not: BigDecimal
+  totalValueLockedUSDUntracked_gt: BigDecimal
+  totalValueLockedUSDUntracked_lt: BigDecimal
+  totalValueLockedUSDUntracked_gte: BigDecimal
+  totalValueLockedUSDUntracked_lte: BigDecimal
+  totalValueLockedUSDUntracked_in: [BigDecimal!]
+  totalValueLockedUSDUntracked_not_in: [BigDecimal!]
+  liquidityProviderCount: BigInt
+  liquidityProviderCount_not: BigInt
+  liquidityProviderCount_gt: BigInt
+  liquidityProviderCount_lt: BigInt
+  liquidityProviderCount_gte: BigInt
+  liquidityProviderCount_lte: BigInt
+  liquidityProviderCount_in: [BigInt!]
+  liquidityProviderCount_not_in: [BigInt!]
 }
 
 type PoolHourData {
