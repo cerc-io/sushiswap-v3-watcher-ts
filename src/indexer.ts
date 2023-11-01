@@ -513,6 +513,10 @@ export class Indexer implements IndexerInterface {
     return syncStatus;
   }
 
+  async forceUpdateSyncStatus (blockHash: string, blockNumber: number): Promise<SyncStatus> {
+    return this._baseIndexer.forceUpdateSyncStatus(blockHash, blockNumber);
+  }
+
   async getEvent (id: string): Promise<Event | undefined> {
     return this._baseIndexer.getEvent(id);
   }
@@ -531,6 +535,10 @@ export class Indexer implements IndexerInterface {
 
   async fetchEventsAndSaveBlocks (blocks: DeepPartial<BlockProgress>[]): Promise<{ blockProgress: BlockProgress, events: DeepPartial<Event>[] }[]> {
     return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+  }
+
+  async fetchAndSaveFilteredEventsAndBlocks (startBlock: number, endBlock: number): Promise<{ blockProgress: BlockProgress, events: DeepPartial<Event>[] }[]> {
+    return this._baseIndexer.fetchAndSaveFilteredEventsAndBlocks(startBlock, endBlock, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
   async saveBlockAndFetchEvents (block: DeepPartial<BlockProgress>): Promise<[BlockProgress, DeepPartial<Event>[]]> {

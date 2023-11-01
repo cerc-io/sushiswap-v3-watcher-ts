@@ -30,6 +30,7 @@ export const main = async (): Promise<any> => {
 
   await jobRunnerCmd.exec(async (jobRunner: JobRunner): Promise<void> => {
     await jobRunner.subscribeBlockProcessingQueue();
+    await jobRunner.subscribeHistoricalProcessingQueue();
     await jobRunner.subscribeEventProcessingQueue();
     await jobRunner.subscribeBlockCheckpointQueue();
     await jobRunner.subscribeHooksQueue();
