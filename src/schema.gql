@@ -935,6 +935,7 @@ input Token_filter {
   derivedETH_in: [BigDecimal!]
   derivedETH_not_in: [BigDecimal!]
   whitelistPools_: Pool_filter
+  tokenDayData_: TokenDayData_filter
   _change_block: BlockChangedFilter
 }
 
@@ -1236,6 +1237,13 @@ input Pool_filter {
   liquidityProviderCount_lte: BigInt
   liquidityProviderCount_in: [BigInt!]
   liquidityProviderCount_not_in: [BigInt!]
+  poolHourData_: PoolHourData_filter
+  poolDayData_: PoolDayData_filter
+  mints_: Mint_filter
+  burns_: Burn_filter
+  swaps_: Swap_filter
+  collects_: Collect_filter
+  ticks_: Tick_filter
   _change_block: BlockChangedFilter
 }
 
@@ -1902,6 +1910,11 @@ input Transaction_filter {
   gasPrice_lte: BigInt
   gasPrice_in: [BigInt!]
   gasPrice_not_in: [BigInt!]
+  mints_: Mint_filter
+  burns_: Burn_filter
+  swaps_: Swap_filter
+  flashed_: Flash_filter
+  collects_: Collect_filter
   _change_block: BlockChangedFilter
 }
 
@@ -3234,6 +3247,8 @@ input Position_filter {
   feeGrowthInside1LastX128_lte: BigInt
   feeGrowthInside1LastX128_in: [BigInt!]
   feeGrowthInside1LastX128_not_in: [BigInt!]
+  increaseEvents_: IncreaseEvent_filter
+  decreaseEvents_: IncreaseEvent_filter
   _change_block: BlockChangedFilter
 }
 
