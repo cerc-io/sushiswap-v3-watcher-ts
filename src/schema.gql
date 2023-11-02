@@ -934,6 +934,12 @@ input Token_filter {
   derivedETH_lte: BigDecimal
   derivedETH_in: [BigDecimal!]
   derivedETH_not_in: [BigDecimal!]
+  whitelistPools: [String!]
+  whitelistPools_not: [String!]
+  whitelistPools_contains: [String!]
+  whitelistPools_contains_nocase: [String!]
+  whitelistPools_not_contains: [String!]
+  whitelistPools_not_contains_nocase: [String!]
   whitelistPools_: Pool_filter
   tokenDayData_: TokenDayData_filter
   _change_block: BlockChangedFilter
