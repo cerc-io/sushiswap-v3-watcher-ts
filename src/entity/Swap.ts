@@ -57,7 +57,7 @@ export class Swap {
   @Column('numeric', { transformer: bigintTransformer })
     tick!: bigint;
 
-  @Column('numeric', { nullable: true })
+  @Column('numeric', { nullable: true, transformer: bigintTransformer })
     logIndex!: bigint | null;
 
   @Column('boolean', { default: false })
