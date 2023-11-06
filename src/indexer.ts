@@ -541,6 +541,10 @@ export class Indexer implements IndexerInterface {
     return this._baseIndexer.fetchAndSaveFilteredEventsAndBlocks(startBlock, endBlock, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
+  async fetchEventsForContracts (blockHash: string, blockNumber: number, addresses: string[]): Promise<DeepPartial<Event>[]> {
+    return this._baseIndexer.fetchEventsForContracts(blockHash, blockNumber, addresses, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+  }
+
   async saveBlockAndFetchEvents (block: DeepPartial<BlockProgress>): Promise<[BlockProgress, DeepPartial<Event>[]]> {
     return this._saveBlockAndFetchEvents(block);
   }
