@@ -742,6 +742,8 @@ input Factory_filter {
   owner_in: [ID!]
   owner_not_in: [ID!]
   _change_block: BlockChangedFilter
+  and: [Factory_filter]
+  or: [Factory_filter]
 }
 
 type Bundle {
@@ -767,6 +769,8 @@ input Bundle_filter {
   ethPriceUSD_in: [BigDecimal!]
   ethPriceUSD_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [Bundle_filter]
+  or: [Bundle_filter]
 }
 
 type Token {
@@ -934,8 +938,17 @@ input Token_filter {
   derivedETH_lte: BigDecimal
   derivedETH_in: [BigDecimal!]
   derivedETH_not_in: [BigDecimal!]
+  whitelistPools: [String!]
+  whitelistPools_not: [String!]
+  whitelistPools_contains: [String!]
+  whitelistPools_contains_nocase: [String!]
+  whitelistPools_not_contains: [String!]
+  whitelistPools_not_contains_nocase: [String!]
   whitelistPools_: Pool_filter
+  tokenDayData_: TokenDayData_filter
   _change_block: BlockChangedFilter
+  and: [Token_filter]
+  or: [Token_filter]
 }
 
 type Pool {
@@ -1236,7 +1249,16 @@ input Pool_filter {
   liquidityProviderCount_lte: BigInt
   liquidityProviderCount_in: [BigInt!]
   liquidityProviderCount_not_in: [BigInt!]
+  poolHourData_: PoolHourData_filter
+  poolDayData_: PoolDayData_filter
+  mints_: Mint_filter
+  burns_: Burn_filter
+  swaps_: Swap_filter
+  collects_: Collect_filter
+  ticks_: Tick_filter
   _change_block: BlockChangedFilter
+  and: [Pool_filter]
+  or: [Pool_filter]
 }
 
 type PoolHourData {
@@ -1437,6 +1459,8 @@ input PoolHourData_filter {
   close_in: [BigDecimal!]
   close_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [PoolHourData_filter]
+  or: [PoolHourData_filter]
 }
 
 type PoolDayData {
@@ -1637,6 +1661,8 @@ input PoolDayData_filter {
   close_in: [BigDecimal!]
   close_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [PoolDayData_filter]
+  or: [PoolDayData_filter]
 }
 
 type Mint {
@@ -1846,6 +1872,8 @@ input Mint_filter {
   logIndex_in: [BigInt!]
   logIndex_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [Mint_filter]
+  or: [Mint_filter]
 }
 
 type Transaction {
@@ -1902,7 +1930,14 @@ input Transaction_filter {
   gasPrice_lte: BigInt
   gasPrice_in: [BigInt!]
   gasPrice_not_in: [BigInt!]
+  mints_: Mint_filter
+  burns_: Burn_filter
+  swaps_: Swap_filter
+  flashed_: Flash_filter
+  collects_: Collect_filter
   _change_block: BlockChangedFilter
+  and: [Transaction_filter]
+  or: [Transaction_filter]
 }
 
 type Burn {
@@ -2101,6 +2136,8 @@ input Burn_filter {
   logIndex_in: [BigInt!]
   logIndex_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [Burn_filter]
+  or: [Burn_filter]
 }
 
 type Swap {
@@ -2301,6 +2338,8 @@ input Swap_filter {
   logIndex_in: [BigInt!]
   logIndex_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [Swap_filter]
+  or: [Swap_filter]
 }
 
 type Flash {
@@ -2446,6 +2485,8 @@ input Flash_filter {
   logIndex_in: [BigInt!]
   logIndex_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [Flash_filter]
+  or: [Flash_filter]
 }
 
 type Collect {
@@ -2580,6 +2621,8 @@ input Collect_filter {
   logIndex_in: [BigInt!]
   logIndex_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [Collect_filter]
+  or: [Collect_filter]
 }
 
 type Tick {
@@ -2801,6 +2844,8 @@ input Tick_filter {
   feeGrowthOutside1X128_in: [BigInt!]
   feeGrowthOutside1X128_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [Tick_filter]
+  or: [Tick_filter]
 }
 
 type TokenDayData {
@@ -2947,6 +2992,8 @@ input TokenDayData_filter {
   close_in: [BigDecimal!]
   close_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [TokenDayData_filter]
+  or: [TokenDayData_filter]
 }
 
 
@@ -3234,7 +3281,11 @@ input Position_filter {
   feeGrowthInside1LastX128_lte: BigInt
   feeGrowthInside1LastX128_in: [BigInt!]
   feeGrowthInside1LastX128_not_in: [BigInt!]
+  increaseEvents_: IncreaseEvent_filter
+  decreaseEvents_: IncreaseEvent_filter
   _change_block: BlockChangedFilter
+  and: [Position_filter]
+  or: [Position_filter]
 }
 
 type IncreaseEvent {
@@ -3397,6 +3448,8 @@ input IncreaseEvent_filter {
   transaction_not_ends_with_nocase: String
   transaction_: Transaction_filter
   _change_block: BlockChangedFilter
+  and: [IncreaseEvent_filter]
+  or: [IncreaseEvent_filter]
 }
 
 type PositionSnapshot {
@@ -3589,6 +3642,8 @@ input PositionSnapshot_filter {
   feeGrowthInside1LastX128_in: [BigInt!]
   feeGrowthInside1LastX128_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [PositionSnapshot_filter]
+  or: [PositionSnapshot_filter]
 }
 
 type UniswapDayData {
@@ -3668,6 +3723,8 @@ input UniswapDayData_filter {
   tvlUSD_in: [BigDecimal!]
   tvlUSD_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [UniswapDayData_filter]
+  or: [UniswapDayData_filter]
 }
 
 type TickHourData {
@@ -3791,6 +3848,8 @@ input TickHourData_filter {
   feesUSD_in: [BigDecimal!]
   feesUSD_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [TickHourData_filter]
+  or: [TickHourData_filter]
 }
 
 type TickDayData {
@@ -3932,6 +3991,8 @@ input TickDayData_filter {
   feeGrowthOutside1X128_in: [BigInt!]
   feeGrowthOutside1X128_not_in: [BigInt!]
   _change_block: BlockChangedFilter
+  and: [TickDayData_filter]
+  or: [TickDayData_filter]
 }
 
 type TokenHourData {
@@ -4078,6 +4139,8 @@ input TokenHourData_filter {
   close_in: [BigDecimal!]
   close_not_in: [BigDecimal!]
   _change_block: BlockChangedFilter
+  and: [TokenHourData_filter]
+  or: [TokenHourData_filter]
 }
 
 type DecreaseEvent {
@@ -4240,6 +4303,8 @@ input DecreaseEvent_filter {
   transaction_not_ends_with_nocase: String
   transaction_: Transaction_filter
   _change_block: BlockChangedFilter
+  and: [DecreaseEvent_filter]
+  or: [DecreaseEvent_filter]
 }
 
 type Mutation {
