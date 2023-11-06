@@ -1,0 +1,12 @@
+query uniswapDayDatas($block: Block_height, $orderBy: UniswapDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    uniswapDayDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+        id
+        date
+        volumeETH
+        volumeUSD
+        volumeUSDUntracked
+        feesUSD
+        txCount
+        tvlUSD
+    }
+}

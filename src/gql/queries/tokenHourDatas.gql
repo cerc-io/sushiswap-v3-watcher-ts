@@ -1,0 +1,34 @@
+query tokenHourDatas($block: Block_height, $orderBy: TokenHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    tokenHourDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+        id
+        periodStartUnix
+        token{
+            id
+            symbol
+            name
+            decimals
+            totalSupply
+            volume
+            volumeUSD
+            untrackedVolumeUSD
+            feesUSD
+            txCount
+            poolCount
+            totalValueLocked
+            totalValueLockedUSD
+            totalValueLockedUSDUntracked
+            derivedETH
+        }
+        volume
+        volumeUSD
+        untrackedVolumeUSD
+        totalValueLocked
+        totalValueLockedUSD
+        priceUSD
+        feesUSD
+        open
+        high
+        low
+        close
+    }
+}
