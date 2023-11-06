@@ -36,7 +36,7 @@ export class Collect {
   @Column('numeric', { transformer: decimalTransformer })
     amount1!: Decimal;
 
-  @Column('numeric', { nullable: true })
+  @Column('numeric', { nullable: true, transformer: decimalTransformer })
     amountUSD!: Decimal | null;
 
   @Column('numeric', { transformer: bigintTransformer })
@@ -45,7 +45,7 @@ export class Collect {
   @Column('numeric', { transformer: bigintTransformer })
     tickUpper!: bigint;
 
-  @Column('numeric', { nullable: true })
+  @Column('numeric', { nullable: true, transformer: bigintTransformer })
     logIndex!: bigint | null;
 
   @Column('boolean', { default: false })

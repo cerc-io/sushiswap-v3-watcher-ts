@@ -1,0 +1,17 @@
+query factories($block: Block_height, $orderBy: Factory_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    factories(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+        id
+        poolCount
+        txCount
+        totalVolumeUSD
+        totalVolumeETH
+        totalFeesUSD
+        totalFeesETH
+        untrackedVolumeUSD
+        totalValueLockedUSD
+        totalValueLockedETH
+        totalValueLockedUSDUntracked
+        totalValueLockedETHUntracked
+        owner
+    }
+}

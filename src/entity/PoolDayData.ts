@@ -36,7 +36,7 @@ export class PoolDayData {
   @Column('numeric', { transformer: decimalTransformer })
     token1Price!: Decimal;
 
-  @Column('numeric', { nullable: true })
+  @Column('numeric', { nullable: true, transformer: bigintTransformer })
     tick!: bigint | null;
 
   @Column('numeric', { transformer: bigintTransformer })

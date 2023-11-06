@@ -48,7 +48,7 @@ export class Flash {
   @Column('numeric', { transformer: decimalTransformer })
     amount1Paid!: Decimal;
 
-  @Column('numeric', { nullable: true })
+  @Column('numeric', { nullable: true, transformer: bigintTransformer })
     logIndex!: bigint | null;
 
   @Column('boolean', { default: false })
