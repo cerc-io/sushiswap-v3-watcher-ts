@@ -16,7 +16,7 @@ type Proof {
 }
 
 type _Block_ {
-  cid: String!
+  cid: String
   hash: String!
   number: Int!
   timestamp: Int!
@@ -568,6 +568,12 @@ type ResultState {
   data: String!
 }
 
+type _Meta_ {
+  block: _Block_!
+  deployment: String!
+  hasIndexingErrors: Boolean!
+}
+
 type Query {
   events(blockHash: String!, contractAddress: String!, name: String): [ResultEvent!]
   eventsInRange(fromBlockNumber: Int!, toBlockNumber: Int!): [ResultEvent!]
@@ -618,6 +624,7 @@ type Query {
   getSyncStatus: SyncStatus
   getStateByCID(cid: String!): ResultState
   getState(blockHash: String!, contractAddress: String!, kind: String): ResultState
+  _meta(block: Block_height): _Meta_
 }
 
 type Factory {

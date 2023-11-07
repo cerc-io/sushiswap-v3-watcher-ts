@@ -30,7 +30,8 @@ import {
   DatabaseInterface,
   Clients,
   EthClient,
-  UpstreamConfig
+  UpstreamConfig,
+  ResultMeta
 } from '@cerc-io/util';
 import { GraphWatcher } from '@cerc-io/graph-node';
 
@@ -197,6 +198,10 @@ export class Indexer implements IndexerInterface {
   async init (): Promise<void> {
     await this._baseIndexer.fetchContracts();
     await this._baseIndexer.fetchStateStatus();
+  }
+
+  async getMetaData (block: BlockHeight): Promise<ResultMeta | null> {
+    return this._baseIndexer.getMetaData(block);
   }
 
   getResultEvent (event: Event): ResultEvent {
@@ -532,6 +537,10 @@ export class Indexer implements IndexerInterface {
 
   async forceUpdateSyncStatus (blockHash: string, blockNumber: number): Promise<SyncStatus> {
     return this._baseIndexer.forceUpdateSyncStatus(blockHash, blockNumber);
+  }
+
+  async updateSyncStatusIndexingError (hasIndexingError: boolean): Promise<SyncStatus> {
+    return this._baseIndexer.updateSyncStatusIndexingError(hasIndexingError);
   }
 
   async getEvent (id: string): Promise<Event | undefined> {
