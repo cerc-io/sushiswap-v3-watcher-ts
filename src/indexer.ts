@@ -29,7 +29,8 @@ import {
   getResultEvent,
   DatabaseInterface,
   Clients,
-  EthClient
+  EthClient,
+  UpstreamConfig
 } from '@cerc-io/util';
 import { GraphWatcher } from '@cerc-io/graph-node';
 
@@ -86,6 +87,7 @@ export class Indexer implements IndexerInterface {
   _ethProvider: BaseProvider;
   _baseIndexer: BaseIndexer;
   _serverConfig: ServerConfig;
+  _upstreamConfig: UpstreamConfig;
   _graphWatcher: GraphWatcher;
 
   _abiMap: Map<string, JsonFragment[]>;
@@ -98,15 +100,26 @@ export class Indexer implements IndexerInterface {
 
   _subgraphStateMap: Map<string, any>;
 
-  constructor (serverConfig: ServerConfig, db: DatabaseInterface, clients: Clients, ethProvider: BaseProvider, jobQueue: JobQueue, graphWatcher?: GraphWatcherInterface) {
+  constructor (
+    config: {
+      server: ServerConfig;
+      upstream: UpstreamConfig;
+    },
+    db: DatabaseInterface,
+    clients: Clients,
+    ethProvider: BaseProvider,
+    jobQueue: JobQueue,
+    graphWatcher?: GraphWatcherInterface
+  ) {
     assert(db);
     assert(clients.ethClient);
 
     this._db = db as Database;
     this._ethClient = clients.ethClient;
     this._ethProvider = ethProvider;
-    this._serverConfig = serverConfig;
-    this._baseIndexer = new BaseIndexer(this._serverConfig, this._db, this._ethClient, this._ethProvider, jobQueue);
+    this._serverConfig = config.server;
+    this._upstreamConfig = config.upstream;
+    this._baseIndexer = new BaseIndexer(config, this._db, this._ethClient, this._ethProvider, jobQueue);
     assert(graphWatcher);
     this._graphWatcher = graphWatcher as GraphWatcher;
 
@@ -167,6 +180,10 @@ export class Indexer implements IndexerInterface {
 
   get serverConfig (): ServerConfig {
     return this._serverConfig;
+  }
+
+  get upstreamConfig (): UpstreamConfig {
+    return this._upstreamConfig;
   }
 
   get storageLayoutMap (): Map<string, StorageLayout> {
