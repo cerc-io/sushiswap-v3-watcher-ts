@@ -1017,6 +1017,17 @@ export const createResolvers = async (indexerArg: IndexerInterface, eventWatcher
         gqlQueryCount.labels('getSyncStatus').inc(1);
 
         return indexer.getSyncStatus();
+      },
+
+      _meta: async (
+        _: any,
+        { block = {} }: { block: BlockHeight }
+      ) => {
+        log('_meta');
+        gqlTotalQueryCount.inc(1);
+        gqlQueryCount.labels('_meta').inc(1);
+
+        return indexer.getMetaData(block);
       }
     }
   };

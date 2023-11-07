@@ -33,4 +33,7 @@ export class SyncStatus implements SyncStatusInterface {
 
   @Column('integer')
     initialIndexedBlockNumber!: number;
+
+  @Column('boolean', { default: false })
+    hasIndexingError!: boolean;
 }
