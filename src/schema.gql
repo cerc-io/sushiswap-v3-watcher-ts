@@ -568,8 +568,14 @@ type ResultState {
   data: String!
 }
 
+type _MetaBlock_ {
+  hash: Bytes
+  number: Int!
+  timestamp: Int
+}
+
 type _Meta_ {
-  block: _Block_!
+  block: _MetaBlock_!
   deployment: String!
   hasIndexingErrors: Boolean!
 }

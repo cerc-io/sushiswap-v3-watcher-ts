@@ -60,8 +60,9 @@
     # gqlApiEndpoint = "http://127.0.0.1:8082/graphql"
     rpcProviderEndpoint = "http://127.0.0.1:8081"
 
-    # Flag to specify if rpc-eth-client should be used from RPC endpoint instead of ipld-eth-client (ipld-eth-server GQL client)
+    # Boolean flag to specify if rpc-eth-client should be used for RPC endpoint instead of ipld-eth-client (ipld-eth-server GQL client)
     rpcClient = true
+
     # Boolean flag to specify if rpcProviderEndpoint is an FEVM RPC endpoint
     isFEVM = true
 
