@@ -21,17 +21,6 @@
   # Interval in number of blocks at which to clear entities cache.
   clearEntitiesCacheInterval = 1000
 
-  # Boolean to filter logs by contracts.
-  filterLogsByAddresses = true
-
-  # Boolean to filter logs by topics.
-  filterLogsByTopics = true
-
-  # Boolean to switch between modes of processing events when starting the server.
-  # Setting to true will fetch filtered events and required blocks in a range of blocks and then process them.
-  # Setting to false will fetch blocks consecutively with its events and then process them (Behaviour is followed in realtime processing near head).
-  useBlockRanges = true
-
   # Max block range for which to return events in eventsInRange GQL query.
   # Use -1 for skipping check on block range.
   maxEventsBlockRange = 1000
@@ -73,6 +62,13 @@
 
     # Flag to specify if rpc-eth-client should be used from RPC endpoint instead of ipld-eth-client (ipld-eth-server GQL client)
     rpcClient = true
+    # Boolean flag to specify if rpcProviderEndpoint is an FEVM RPC endpoint
+    isFEVM = true
+
+    # Boolean flag to filter event logs by contracts
+    filterLogsByAddresses = true
+    # Boolean flag to filter event logs by topics
+    filterLogsByTopics = true
 
   [upstream.cache]
     name = "requests"
@@ -88,6 +84,11 @@
   blockDelayInMilliSecs = 2000
   prefetchBlocksInMem = false
   prefetchBlockCount = 10
+
+  # Boolean to switch between modes of processing events when starting the server.
+  # Setting to true will fetch filtered events and required blocks in a range of blocks and then process them.
+  # Setting to false will fetch blocks consecutively with its events and then process them (Behaviour is followed in realtime processing near head).
+  useBlockRanges = true
 
   # Block range in which logs are fetched during historical blocks processing
   historicalLogsBlockRange = 2000
