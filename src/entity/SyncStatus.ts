@@ -23,6 +23,12 @@ export class SyncStatus implements SyncStatusInterface {
     latestIndexedBlockNumber!: number;
 
   @Column('varchar', { length: 66 })
+    latestProcessedBlockHash!: string;
+
+  @Column('integer')
+    latestProcessedBlockNumber!: number;
+
+  @Column('varchar', { length: 66 })
     latestCanonicalBlockHash!: string;
 
   @Column('integer')
