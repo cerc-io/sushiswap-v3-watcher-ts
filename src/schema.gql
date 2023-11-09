@@ -1380,6 +1380,7 @@ type Query {
   bundles(block: Block_height, where: Bundle_filter, orderBy: Bundle_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Bundle!]!
   token(id: ID!, block: Block_height): Token!
   tokens(block: Block_height, where: Token_filter, orderBy: Token_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Token!]!
+  tokenSearch(block: Block_height, text: String!, where: Token_filter, first: Int = 100, skip: Int = 0): [Token!]!
   pool(id: ID!, block: Block_height): Pool!
   pools(block: Block_height, where: Pool_filter, orderBy: Pool_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Pool!]!
   tick(id: ID!, block: Block_height): Tick!
