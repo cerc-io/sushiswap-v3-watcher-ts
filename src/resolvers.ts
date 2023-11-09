@@ -1028,6 +1028,31 @@ export const createResolvers = async (indexerArg: IndexerInterface, eventWatcher
         gqlQueryCount.labels('_meta').inc(1);
 
         return indexer.getMetaData(block);
+      },
+
+      tokenSearch: async (
+        _: any,
+        { block = {}, text, where = {}, first, skip }: { block: BlockHeight, text: string, where: { [key: string]: any }, first: number, skip: number },
+        __: any,
+        info: GraphQLResolveInfo
+      ) => {
+        log('tokenSearch', JSON.stringify(block, jsonBigIntStringReplacer), text, JSON.stringify(where, jsonBigIntStringReplacer), first, skip);
+        gqlTotalQueryCount.inc(1);
+        gqlQueryCount.labels('tokenSearch').inc(1);
+        assert(info.fieldNodes[0].selectionSet);
+
+        // Set cache-control hints
+        // setGQLCacheHints(info, block, gqlCacheConfig);
+
+        where.tokenSearch_match = text;
+
+        return indexer.getSubgraphEntities(
+          Token,
+          block,
+          where,
+          { limit: first, skip, tsRankBy: 'tokenSearch', tsRankValue: text },
+          info.fieldNodes[0].selectionSet.selections
+        );
       }
     }
   };

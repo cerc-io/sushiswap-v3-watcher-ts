@@ -65,4 +65,7 @@ export class Token {
 
   @Column('boolean', { default: false })
     isPruned!: boolean;
+
+  @Column('tsvector', { nullable: true })
+    tokenSearch!: string;
 }
