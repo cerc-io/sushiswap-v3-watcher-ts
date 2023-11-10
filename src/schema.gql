@@ -1374,49 +1374,49 @@ type _Meta_ {
 type Query {
   events(blockHash: String!, contractAddress: String!, name: String): [ResultEvent!]
   eventsInRange(fromBlockNumber: Int!, toBlockNumber: Int!): [ResultEvent!]
-  factory(id: ID!, block: Block_height): Factory!
+  factory(id: ID!, block: Block_height): Factory
   factories(block: Block_height, where: Factory_filter, orderBy: Factory_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Factory!]!
-  bundle(id: ID!, block: Block_height): Bundle!
+  bundle(id: ID!, block: Block_height): Bundle
   bundles(block: Block_height, where: Bundle_filter, orderBy: Bundle_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Bundle!]!
-  token(id: ID!, block: Block_height): Token!
+  token(id: ID!, block: Block_height): Token
   tokens(block: Block_height, where: Token_filter, orderBy: Token_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Token!]!
-  pool(id: ID!, block: Block_height): Pool!
+  pool(id: ID!, block: Block_height): Pool
   pools(block: Block_height, where: Pool_filter, orderBy: Pool_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Pool!]!
-  tick(id: ID!, block: Block_height): Tick!
+  tick(id: ID!, block: Block_height): Tick
   ticks(block: Block_height, where: Tick_filter, orderBy: Tick_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Tick!]!
-  position(id: ID!, block: Block_height): Position!
+  position(id: ID!, block: Block_height): Position
   positions(block: Block_height, where: Position_filter, orderBy: Position_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Position!]!
-  positionSnapshot(id: ID!, block: Block_height): PositionSnapshot!
+  positionSnapshot(id: ID!, block: Block_height): PositionSnapshot
   positionSnapshots(block: Block_height, where: PositionSnapshot_filter, orderBy: PositionSnapshot_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PositionSnapshot!]!
-  transaction(id: ID!, block: Block_height): Transaction!
+  transaction(id: ID!, block: Block_height): Transaction
   transactions(block: Block_height, where: Transaction_filter, orderBy: Transaction_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Transaction!]!
-  mint(id: ID!, block: Block_height): Mint!
+  mint(id: ID!, block: Block_height): Mint
   mints(block: Block_height, where: Mint_filter, orderBy: Mint_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Mint!]!
-  burn(id: ID!, block: Block_height): Burn!
+  burn(id: ID!, block: Block_height): Burn
   burns(block: Block_height, where: Burn_filter, orderBy: Burn_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Burn!]!
-  swap(id: ID!, block: Block_height): Swap!
+  swap(id: ID!, block: Block_height): Swap
   swaps(block: Block_height, where: Swap_filter, orderBy: Swap_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Swap!]!
-  collect(id: ID!, block: Block_height): Collect!
+  collect(id: ID!, block: Block_height): Collect
   collects(block: Block_height, where: Collect_filter, orderBy: Collect_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Collect!]!
-  flash(id: ID!, block: Block_height): Flash!
+  flash(id: ID!, block: Block_height): Flash
   flashes(block: Block_height, where: Flash_filter, orderBy: Flash_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Flash!]!
-  uniswapDayData(id: ID!, block: Block_height): UniswapDayData!
+  uniswapDayData(id: ID!, block: Block_height): UniswapDayData
   uniswapDayDatas(block: Block_height, where: UniswapDayData_filter, orderBy: UniswapDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [UniswapDayData!]!
-  poolDayData(id: ID!, block: Block_height): PoolDayData!
+  poolDayData(id: ID!, block: Block_height): PoolDayData
   poolDayDatas(block: Block_height, where: PoolDayData_filter, orderBy: PoolDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PoolDayData!]!
-  poolHourData(id: ID!, block: Block_height): PoolHourData!
+  poolHourData(id: ID!, block: Block_height): PoolHourData
   poolHourDatas(block: Block_height, where: PoolHourData_filter, orderBy: PoolHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PoolHourData!]!
-  tickHourData(id: ID!, block: Block_height): TickHourData!
+  tickHourData(id: ID!, block: Block_height): TickHourData
   tickHourDatas(block: Block_height, where: TickHourData_filter, orderBy: TickHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TickHourData!]!
-  tickDayData(id: ID!, block: Block_height): TickDayData!
+  tickDayData(id: ID!, block: Block_height): TickDayData
   tickDayDatas(block: Block_height, where: TickDayData_filter, orderBy: TickDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TickDayData!]!
-  tokenDayData(id: ID!, block: Block_height): TokenDayData!
+  tokenDayData(id: ID!, block: Block_height): TokenDayData
   tokenDayDatas(block: Block_height, where: TokenDayData_filter, orderBy: TokenDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TokenDayData!]!
-  tokenHourData(id: ID!, block: Block_height): TokenHourData!
+  tokenHourData(id: ID!, block: Block_height): TokenHourData
   tokenHourDatas(block: Block_height, where: TokenHourData_filter, orderBy: TokenHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TokenHourData!]!
-  increaseEvent(id: ID!, block: Block_height): IncreaseEvent!
+  increaseEvent(id: ID!, block: Block_height): IncreaseEvent
   increaseEvents(block: Block_height, where: IncreaseEvent_filter, orderBy: IncreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [IncreaseEvent!]!
-  decreaseEvent(id: ID!, block: Block_height): DecreaseEvent!
+  decreaseEvent(id: ID!, block: Block_height): DecreaseEvent
   decreaseEvents(block: Block_height, where: DecreaseEvent_filter, orderBy: DecreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [DecreaseEvent!]!
   getSyncStatus: SyncStatus
   getStateByCID(cid: String!): ResultState
