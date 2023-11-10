@@ -31,7 +31,10 @@ import {
   Clients,
   EthClient,
   UpstreamConfig,
-  ResultMeta
+  ResultMeta,
+  EthFullBlock,
+  EthFullTransaction,
+  ExtraEventData
 } from '@cerc-io/util';
 import { GraphWatcher } from '@cerc-io/graph-node';
 
@@ -348,21 +351,21 @@ export class Indexer implements IndexerInterface {
     return this._graphWatcher.getEntities(entity, this._relationsMap, block, where, queryOptions, selections);
   }
 
-  async triggerIndexingOnEvent (event: Event): Promise<void> {
+  async triggerIndexingOnEvent (event: Event, extraData: ExtraEventData): Promise<void> {
     const resultEvent = this.getResultEvent(event);
 
     console.time('time:indexer#processEvent-mapping_code');
     // Call subgraph handler for event.
-    await this._graphWatcher.handleEvent(resultEvent);
+    await this._graphWatcher.handleEvent(resultEvent, extraData);
     console.timeEnd('time:indexer#processEvent-mapping_code');
 
     // Call custom hook function for indexing on event.
     await handleEvent(this, resultEvent);
   }
 
-  async processEvent (event: Event): Promise<void> {
+  async processEvent (event: Event, extraData: ExtraEventData): Promise<void> {
     // Trigger indexing of data based on the event.
-    await this.triggerIndexingOnEvent(event);
+    await this.triggerIndexingOnEvent(event, extraData);
   }
 
   async processBlock (blockProgress: BlockProgress): Promise<void> {
@@ -563,7 +566,12 @@ export class Indexer implements IndexerInterface {
     return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
-  async fetchAndSaveFilteredEventsAndBlocks (startBlock: number, endBlock: number): Promise<{ blockProgress: BlockProgress, events: DeepPartial<Event>[] }[]> {
+  async fetchAndSaveFilteredEventsAndBlocks (startBlock: number, endBlock: number): Promise<{
+    blockProgress: BlockProgress,
+    events: DeepPartial<Event>[],
+    ethFullBlock: EthFullBlock;
+    ethFullTransactions: EthFullTransaction[];
+  }[]> {
     return this._baseIndexer.fetchAndSaveFilteredEventsAndBlocks(startBlock, endBlock, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
@@ -571,7 +579,11 @@ export class Indexer implements IndexerInterface {
     return this._baseIndexer.fetchEventsForContracts(blockHash, blockNumber, addresses, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
-  async saveBlockAndFetchEvents (block: DeepPartial<BlockProgress>): Promise<[BlockProgress, DeepPartial<Event>[]]> {
+  async saveBlockAndFetchEvents (block: DeepPartial<BlockProgress>): Promise<[
+    BlockProgress,
+    DeepPartial<Event>[],
+    EthFullTransaction[]
+  ]> {
     return this._saveBlockAndFetchEvents(block);
   }
 
@@ -1358,11 +1370,15 @@ export class Indexer implements IndexerInterface {
     blockNumber,
     blockTimestamp,
     parentHash
-  }: DeepPartial<BlockProgress>): Promise<[BlockProgress, DeepPartial<Event>[]]> {
+  }: DeepPartial<BlockProgress>): Promise<[
+    BlockProgress,
+    DeepPartial<Event>[],
+    EthFullTransaction[]
+  ]> {
     assert(blockHash);
     assert(blockNumber);
 
-    const dbEvents = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+    const { events: dbEvents, transactions } = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
 
     const dbTx = await this._db.createTransactionRunner();
     try {
@@ -1379,7 +1395,7 @@ export class Indexer implements IndexerInterface {
       await dbTx.commitTransaction();
       console.timeEnd(`time:indexer#_saveBlockAndFetchEvents-db-save-${blockNumber}`);
 
-      return [blockProgress, []];
+      return [blockProgress, [], transactions];
     } catch (error) {
       await dbTx.rollbackTransaction();
       throw error;
