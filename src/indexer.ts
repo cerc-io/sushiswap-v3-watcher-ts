@@ -624,6 +624,13 @@ export class Indexer implements IndexerInterface {
     await this.resetLatestEntities(blockNumber);
   }
 
+  async clearProcessedBlockData (block: BlockProgress): Promise<void> {
+    const entities = [...ENTITIES, FrothyEntity];
+    await this._baseIndexer.clearProcessedBlockData(block, entities);
+
+    await this.resetLatestEntities(block.blockNumber);
+  }
+
   getEntityTypesMap (): Map<string, { [key: string]: string }> {
     return this._entityTypesMap;
   }
