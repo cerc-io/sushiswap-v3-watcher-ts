@@ -346,6 +346,8 @@ enum Token_orderBy {
   totalValueLockedUSD
   totalValueLockedUSDUntracked
   derivedETH
+  whitelistPools
+  tokenDayData
 }
 
 input Token_filter {
@@ -365,10 +367,6 @@ input Token_filter {
   symbol_lte: String
   symbol_in: [String!]
   symbol_not_in: [String!]
-  symbol_contains: String
-  symbol_contains_nocase: String
-  symbol_not_contains: String
-  symbol_not_contains_nocase: String
   symbol_starts_with: String
   symbol_starts_with_nocase: String
   symbol_not_starts_with: String
@@ -377,6 +375,10 @@ input Token_filter {
   symbol_ends_with_nocase: String
   symbol_not_ends_with: String
   symbol_not_ends_with_nocase: String
+  symbol_contains: String
+  symbol_not_contains: String
+  symbol_contains_nocase: String
+  symbol_not_contains_nocase: String
   name: String
   name_not: String
   name_gt: String
@@ -385,10 +387,6 @@ input Token_filter {
   name_lte: String
   name_in: [String!]
   name_not_in: [String!]
-  name_contains: String
-  name_contains_nocase: String
-  name_not_contains: String
-  name_not_contains_nocase: String
   name_starts_with: String
   name_starts_with_nocase: String
   name_not_starts_with: String
@@ -397,6 +395,10 @@ input Token_filter {
   name_ends_with_nocase: String
   name_not_ends_with: String
   name_not_ends_with_nocase: String
+  name_contains: String
+  name_not_contains: String
+  name_contains_nocase: String
+  name_not_contains_nocase: String
   decimals: BigInt
   decimals_not: BigInt
   decimals_gt: BigInt
@@ -496,8 +498,8 @@ input Token_filter {
   whitelistPools: [String!]
   whitelistPools_not: [String!]
   whitelistPools_contains: [String!]
-  whitelistPools_contains_nocase: [String!]
   whitelistPools_not_contains: [String!]
+  whitelistPools_contains_nocase: [String!]
   whitelistPools_not_contains_nocase: [String!]
   whitelistPools_: Pool_filter
   tokenDayData_: TokenDayData_filter
@@ -566,6 +568,13 @@ enum Pool_orderBy {
   totalValueLockedUSD
   totalValueLockedUSDUntracked
   liquidityProviderCount
+  poolHourData
+  poolDayData
+  mints
+  burns
+  swaps
+  collects
+  ticks
 }
 
 input Pool_filter {
@@ -601,10 +610,6 @@ input Pool_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -613,6 +618,10 @@ input Pool_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -622,10 +631,6 @@ input Pool_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -634,6 +639,10 @@ input Pool_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   feeTier: BigInt
   feeTier_not: BigInt
@@ -907,10 +916,6 @@ input Tick_filter {
   poolAddress_lte: String
   poolAddress_in: [String!]
   poolAddress_not_in: [String!]
-  poolAddress_contains: String
-  poolAddress_contains_nocase: String
-  poolAddress_not_contains: String
-  poolAddress_not_contains_nocase: String
   poolAddress_starts_with: String
   poolAddress_starts_with_nocase: String
   poolAddress_not_starts_with: String
@@ -919,6 +924,10 @@ input Tick_filter {
   poolAddress_ends_with_nocase: String
   poolAddress_not_ends_with: String
   poolAddress_not_ends_with_nocase: String
+  poolAddress_contains: String
+  poolAddress_not_contains: String
+  poolAddress_contains_nocase: String
+  poolAddress_not_contains_nocase: String
   tickIdx: BigInt
   tickIdx_not: BigInt
   tickIdx_gt: BigInt
@@ -935,10 +944,6 @@ input Tick_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -947,6 +952,10 @@ input Tick_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   liquidityGross: BigInt
   liquidityGross_not: BigInt
@@ -1214,6 +1223,8 @@ enum Position_orderBy {
   transaction__gasPrice
   feeGrowthInside0LastX128
   feeGrowthInside1LastX128
+  increaseEvents
+  decreaseEvents
 }
 
 input Position_filter {
@@ -1243,10 +1254,6 @@ input Position_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -1255,6 +1262,10 @@ input Position_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   token0: String
   token0_not: String
@@ -1264,10 +1275,6 @@ input Position_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -1276,6 +1283,10 @@ input Position_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -1285,10 +1296,6 @@ input Position_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -1297,6 +1304,10 @@ input Position_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   tickLower: String
   tickLower_not: String
@@ -1306,10 +1317,6 @@ input Position_filter {
   tickLower_lte: String
   tickLower_in: [String!]
   tickLower_not_in: [String!]
-  tickLower_contains: String
-  tickLower_contains_nocase: String
-  tickLower_not_contains: String
-  tickLower_not_contains_nocase: String
   tickLower_starts_with: String
   tickLower_starts_with_nocase: String
   tickLower_not_starts_with: String
@@ -1318,6 +1325,10 @@ input Position_filter {
   tickLower_ends_with_nocase: String
   tickLower_not_ends_with: String
   tickLower_not_ends_with_nocase: String
+  tickLower_contains: String
+  tickLower_not_contains: String
+  tickLower_contains_nocase: String
+  tickLower_not_contains_nocase: String
   tickLower_: Tick_filter
   tickUpper: String
   tickUpper_not: String
@@ -1327,10 +1338,6 @@ input Position_filter {
   tickUpper_lte: String
   tickUpper_in: [String!]
   tickUpper_not_in: [String!]
-  tickUpper_contains: String
-  tickUpper_contains_nocase: String
-  tickUpper_not_contains: String
-  tickUpper_not_contains_nocase: String
   tickUpper_starts_with: String
   tickUpper_starts_with_nocase: String
   tickUpper_not_starts_with: String
@@ -1339,6 +1346,10 @@ input Position_filter {
   tickUpper_ends_with_nocase: String
   tickUpper_not_ends_with: String
   tickUpper_not_ends_with_nocase: String
+  tickUpper_contains: String
+  tickUpper_not_contains: String
+  tickUpper_contains_nocase: String
+  tickUpper_not_contains_nocase: String
   tickUpper_: Tick_filter
   liquidity: BigInt
   liquidity_not: BigInt
@@ -1444,10 +1455,6 @@ input Position_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -1456,6 +1463,10 @@ input Position_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   feeGrowthInside0LastX128: BigInt
   feeGrowthInside0LastX128_not: BigInt
@@ -1574,10 +1585,6 @@ input PositionSnapshot_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -1586,6 +1593,10 @@ input PositionSnapshot_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   position: String
   position_not: String
@@ -1595,10 +1606,6 @@ input PositionSnapshot_filter {
   position_lte: String
   position_in: [String!]
   position_not_in: [String!]
-  position_contains: String
-  position_contains_nocase: String
-  position_not_contains: String
-  position_not_contains_nocase: String
   position_starts_with: String
   position_starts_with_nocase: String
   position_not_starts_with: String
@@ -1607,6 +1614,10 @@ input PositionSnapshot_filter {
   position_ends_with_nocase: String
   position_not_ends_with: String
   position_not_ends_with_nocase: String
+  position_contains: String
+  position_not_contains: String
+  position_contains_nocase: String
+  position_not_contains_nocase: String
   position_: Position_filter
   blockNumber: BigInt
   blockNumber_not: BigInt
@@ -1688,10 +1699,6 @@ input PositionSnapshot_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -1700,6 +1707,10 @@ input PositionSnapshot_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   feeGrowthInside0LastX128: BigInt
   feeGrowthInside0LastX128_not: BigInt
@@ -1728,6 +1739,11 @@ enum Transaction_orderBy {
   timestamp
   gasUsed
   gasPrice
+  mints
+  burns
+  swaps
+  flashed
+  collects
 }
 
 input Transaction_filter {
@@ -1879,10 +1895,6 @@ input Mint_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -1891,6 +1903,10 @@ input Mint_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   timestamp: BigInt
   timestamp_not: BigInt
@@ -1908,10 +1924,6 @@ input Mint_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -1920,6 +1932,10 @@ input Mint_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   token0: String
   token0_not: String
@@ -1929,10 +1945,6 @@ input Mint_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -1941,6 +1953,10 @@ input Mint_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -1950,10 +1966,6 @@ input Mint_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -1962,6 +1974,10 @@ input Mint_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   owner: Bytes
   owner_not: Bytes
@@ -2151,10 +2167,6 @@ input Burn_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -2163,6 +2175,10 @@ input Burn_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   pool: String
   pool_not: String
@@ -2172,10 +2188,6 @@ input Burn_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -2184,6 +2196,10 @@ input Burn_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   token0: String
   token0_not: String
@@ -2193,10 +2209,6 @@ input Burn_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -2205,6 +2217,10 @@ input Burn_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -2214,10 +2230,6 @@ input Burn_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -2226,6 +2238,10 @@ input Burn_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   timestamp: BigInt
   timestamp_not: BigInt
@@ -2413,10 +2429,6 @@ input Swap_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -2425,6 +2437,10 @@ input Swap_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   timestamp: BigInt
   timestamp_not: BigInt
@@ -2442,10 +2458,6 @@ input Swap_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -2454,6 +2466,10 @@ input Swap_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   token0: String
   token0_not: String
@@ -2463,10 +2479,6 @@ input Swap_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -2475,6 +2487,10 @@ input Swap_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -2484,10 +2500,6 @@ input Swap_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -2496,6 +2508,10 @@ input Swap_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   sender: Bytes
   sender_not: Bytes
@@ -2643,10 +2659,6 @@ input Collect_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -2655,6 +2667,10 @@ input Collect_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   timestamp: BigInt
   timestamp_not: BigInt
@@ -2672,10 +2688,6 @@ input Collect_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -2684,6 +2696,10 @@ input Collect_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   owner: Bytes
   owner_not: Bytes
@@ -2812,10 +2828,6 @@ input Flash_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -2824,6 +2836,10 @@ input Flash_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   timestamp: BigInt
   timestamp_not: BigInt
@@ -2841,10 +2857,6 @@ input Flash_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -2853,6 +2865,10 @@ input Flash_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   sender: Bytes
   sender_not: Bytes
@@ -3058,235 +3074,6 @@ enum PoolDayData_orderBy {
   close
 }
 
-input PoolHourData_filter {
-  id: ID
-  id_not: ID
-  id_gt: ID
-  id_lt: ID
-  id_gte: ID
-  id_lte: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  periodStartUnix: Int
-  periodStartUnix_not: Int
-  periodStartUnix_gt: Int
-  periodStartUnix_lt: Int
-  periodStartUnix_gte: Int
-  periodStartUnix_lte: Int
-  periodStartUnix_in: [Int!]
-  periodStartUnix_not_in: [Int!]
-  pool: String
-  pool_not: String
-  pool_gt: String
-  pool_lt: String
-  pool_gte: String
-  pool_lte: String
-  pool_in: [String!]
-  pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
-  pool_starts_with: String
-  pool_starts_with_nocase: String
-  pool_not_starts_with: String
-  pool_not_starts_with_nocase: String
-  pool_ends_with: String
-  pool_ends_with_nocase: String
-  pool_not_ends_with: String
-  pool_not_ends_with_nocase: String
-  pool_: Pool_filter
-  liquidity: BigInt
-  liquidity_not: BigInt
-  liquidity_gt: BigInt
-  liquidity_lt: BigInt
-  liquidity_gte: BigInt
-  liquidity_lte: BigInt
-  liquidity_in: [BigInt!]
-  liquidity_not_in: [BigInt!]
-  sqrtPrice: BigInt
-  sqrtPrice_not: BigInt
-  sqrtPrice_gt: BigInt
-  sqrtPrice_lt: BigInt
-  sqrtPrice_gte: BigInt
-  sqrtPrice_lte: BigInt
-  sqrtPrice_in: [BigInt!]
-  sqrtPrice_not_in: [BigInt!]
-  token0Price: BigDecimal
-  token0Price_not: BigDecimal
-  token0Price_gt: BigDecimal
-  token0Price_lt: BigDecimal
-  token0Price_gte: BigDecimal
-  token0Price_lte: BigDecimal
-  token0Price_in: [BigDecimal!]
-  token0Price_not_in: [BigDecimal!]
-  token1Price: BigDecimal
-  token1Price_not: BigDecimal
-  token1Price_gt: BigDecimal
-  token1Price_lt: BigDecimal
-  token1Price_gte: BigDecimal
-  token1Price_lte: BigDecimal
-  token1Price_in: [BigDecimal!]
-  token1Price_not_in: [BigDecimal!]
-  tick: BigInt
-  tick_not: BigInt
-  tick_gt: BigInt
-  tick_lt: BigInt
-  tick_gte: BigInt
-  tick_lte: BigInt
-  tick_in: [BigInt!]
-  tick_not_in: [BigInt!]
-  feeGrowthGlobal0X128: BigInt
-  feeGrowthGlobal0X128_not: BigInt
-  feeGrowthGlobal0X128_gt: BigInt
-  feeGrowthGlobal0X128_lt: BigInt
-  feeGrowthGlobal0X128_gte: BigInt
-  feeGrowthGlobal0X128_lte: BigInt
-  feeGrowthGlobal0X128_in: [BigInt!]
-  feeGrowthGlobal0X128_not_in: [BigInt!]
-  feeGrowthGlobal1X128: BigInt
-  feeGrowthGlobal1X128_not: BigInt
-  feeGrowthGlobal1X128_gt: BigInt
-  feeGrowthGlobal1X128_lt: BigInt
-  feeGrowthGlobal1X128_gte: BigInt
-  feeGrowthGlobal1X128_lte: BigInt
-  feeGrowthGlobal1X128_in: [BigInt!]
-  feeGrowthGlobal1X128_not_in: [BigInt!]
-  tvlUSD: BigDecimal
-  tvlUSD_not: BigDecimal
-  tvlUSD_gt: BigDecimal
-  tvlUSD_lt: BigDecimal
-  tvlUSD_gte: BigDecimal
-  tvlUSD_lte: BigDecimal
-  tvlUSD_in: [BigDecimal!]
-  tvlUSD_not_in: [BigDecimal!]
-  volumeToken0: BigDecimal
-  volumeToken0_not: BigDecimal
-  volumeToken0_gt: BigDecimal
-  volumeToken0_lt: BigDecimal
-  volumeToken0_gte: BigDecimal
-  volumeToken0_lte: BigDecimal
-  volumeToken0_in: [BigDecimal!]
-  volumeToken0_not_in: [BigDecimal!]
-  volumeToken1: BigDecimal
-  volumeToken1_not: BigDecimal
-  volumeToken1_gt: BigDecimal
-  volumeToken1_lt: BigDecimal
-  volumeToken1_gte: BigDecimal
-  volumeToken1_lte: BigDecimal
-  volumeToken1_in: [BigDecimal!]
-  volumeToken1_not_in: [BigDecimal!]
-  volumeUSD: BigDecimal
-  volumeUSD_not: BigDecimal
-  volumeUSD_gt: BigDecimal
-  volumeUSD_lt: BigDecimal
-  volumeUSD_gte: BigDecimal
-  volumeUSD_lte: BigDecimal
-  volumeUSD_in: [BigDecimal!]
-  volumeUSD_not_in: [BigDecimal!]
-  feesUSD: BigDecimal
-  feesUSD_not: BigDecimal
-  feesUSD_gt: BigDecimal
-  feesUSD_lt: BigDecimal
-  feesUSD_gte: BigDecimal
-  feesUSD_lte: BigDecimal
-  feesUSD_in: [BigDecimal!]
-  feesUSD_not_in: [BigDecimal!]
-  txCount: BigInt
-  txCount_not: BigInt
-  txCount_gt: BigInt
-  txCount_lt: BigInt
-  txCount_gte: BigInt
-  txCount_lte: BigInt
-  txCount_in: [BigInt!]
-  txCount_not_in: [BigInt!]
-  open: BigDecimal
-  open_not: BigDecimal
-  open_gt: BigDecimal
-  open_lt: BigDecimal
-  open_gte: BigDecimal
-  open_lte: BigDecimal
-  open_in: [BigDecimal!]
-  open_not_in: [BigDecimal!]
-  high: BigDecimal
-  high_not: BigDecimal
-  high_gt: BigDecimal
-  high_lt: BigDecimal
-  high_gte: BigDecimal
-  high_lte: BigDecimal
-  high_in: [BigDecimal!]
-  high_not_in: [BigDecimal!]
-  low: BigDecimal
-  low_not: BigDecimal
-  low_gt: BigDecimal
-  low_lt: BigDecimal
-  low_gte: BigDecimal
-  low_lte: BigDecimal
-  low_in: [BigDecimal!]
-  low_not_in: [BigDecimal!]
-  close: BigDecimal
-  close_not: BigDecimal
-  close_gt: BigDecimal
-  close_lt: BigDecimal
-  close_gte: BigDecimal
-  close_lte: BigDecimal
-  close_in: [BigDecimal!]
-  close_not_in: [BigDecimal!]
-  _change_block: BlockChangedFilter
-  and: [PoolHourData_filter]
-  or: [PoolHourData_filter]
-}
-
-enum PoolHourData_orderBy {
-  id
-  periodStartUnix
-  pool
-  pool__id
-  pool__createdAtTimestamp
-  pool__createdAtBlockNumber
-  pool__feeTier
-  pool__liquidity
-  pool__sqrtPrice
-  pool__feeGrowthGlobal0X128
-  pool__feeGrowthGlobal1X128
-  pool__token0Price
-  pool__token1Price
-  pool__tick
-  pool__observationIndex
-  pool__volumeToken0
-  pool__volumeToken1
-  pool__volumeUSD
-  pool__untrackedVolumeUSD
-  pool__feesUSD
-  pool__txCount
-  pool__collectedFeesToken0
-  pool__collectedFeesToken1
-  pool__collectedFeesUSD
-  pool__totalValueLockedToken0
-  pool__totalValueLockedToken1
-  pool__totalValueLockedETH
-  pool__totalValueLockedUSD
-  pool__totalValueLockedUSDUntracked
-  pool__liquidityProviderCount
-  liquidity
-  sqrtPrice
-  token0Price
-  token1Price
-  tick
-  feeGrowthGlobal0X128
-  feeGrowthGlobal1X128
-  tvlUSD
-  volumeToken0
-  volumeToken1
-  volumeUSD
-  feesUSD
-  txCount
-  open
-  high
-  low
-  close
-}
-
 input PoolDayData_filter {
   id: ID
   id_not: ID
@@ -3312,10 +3099,6 @@ input PoolDayData_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -3324,6 +3107,10 @@ input PoolDayData_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   liquidity: BigInt
   liquidity_not: BigInt
@@ -3466,6 +3253,235 @@ input PoolDayData_filter {
   or: [PoolDayData_filter]
 }
 
+enum PoolHourData_orderBy {
+  id
+  periodStartUnix
+  pool
+  pool__id
+  pool__createdAtTimestamp
+  pool__createdAtBlockNumber
+  pool__feeTier
+  pool__liquidity
+  pool__sqrtPrice
+  pool__feeGrowthGlobal0X128
+  pool__feeGrowthGlobal1X128
+  pool__token0Price
+  pool__token1Price
+  pool__tick
+  pool__observationIndex
+  pool__volumeToken0
+  pool__volumeToken1
+  pool__volumeUSD
+  pool__untrackedVolumeUSD
+  pool__feesUSD
+  pool__txCount
+  pool__collectedFeesToken0
+  pool__collectedFeesToken1
+  pool__collectedFeesUSD
+  pool__totalValueLockedToken0
+  pool__totalValueLockedToken1
+  pool__totalValueLockedETH
+  pool__totalValueLockedUSD
+  pool__totalValueLockedUSDUntracked
+  pool__liquidityProviderCount
+  liquidity
+  sqrtPrice
+  token0Price
+  token1Price
+  tick
+  feeGrowthGlobal0X128
+  feeGrowthGlobal1X128
+  tvlUSD
+  volumeToken0
+  volumeToken1
+  volumeUSD
+  feesUSD
+  txCount
+  open
+  high
+  low
+  close
+}
+
+input PoolHourData_filter {
+  id: ID
+  id_not: ID
+  id_gt: ID
+  id_lt: ID
+  id_gte: ID
+  id_lte: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  periodStartUnix: Int
+  periodStartUnix_not: Int
+  periodStartUnix_gt: Int
+  periodStartUnix_lt: Int
+  periodStartUnix_gte: Int
+  periodStartUnix_lte: Int
+  periodStartUnix_in: [Int!]
+  periodStartUnix_not_in: [Int!]
+  pool: String
+  pool_not: String
+  pool_gt: String
+  pool_lt: String
+  pool_gte: String
+  pool_lte: String
+  pool_in: [String!]
+  pool_not_in: [String!]
+  pool_starts_with: String
+  pool_starts_with_nocase: String
+  pool_not_starts_with: String
+  pool_not_starts_with_nocase: String
+  pool_ends_with: String
+  pool_ends_with_nocase: String
+  pool_not_ends_with: String
+  pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
+  pool_: Pool_filter
+  liquidity: BigInt
+  liquidity_not: BigInt
+  liquidity_gt: BigInt
+  liquidity_lt: BigInt
+  liquidity_gte: BigInt
+  liquidity_lte: BigInt
+  liquidity_in: [BigInt!]
+  liquidity_not_in: [BigInt!]
+  sqrtPrice: BigInt
+  sqrtPrice_not: BigInt
+  sqrtPrice_gt: BigInt
+  sqrtPrice_lt: BigInt
+  sqrtPrice_gte: BigInt
+  sqrtPrice_lte: BigInt
+  sqrtPrice_in: [BigInt!]
+  sqrtPrice_not_in: [BigInt!]
+  token0Price: BigDecimal
+  token0Price_not: BigDecimal
+  token0Price_gt: BigDecimal
+  token0Price_lt: BigDecimal
+  token0Price_gte: BigDecimal
+  token0Price_lte: BigDecimal
+  token0Price_in: [BigDecimal!]
+  token0Price_not_in: [BigDecimal!]
+  token1Price: BigDecimal
+  token1Price_not: BigDecimal
+  token1Price_gt: BigDecimal
+  token1Price_lt: BigDecimal
+  token1Price_gte: BigDecimal
+  token1Price_lte: BigDecimal
+  token1Price_in: [BigDecimal!]
+  token1Price_not_in: [BigDecimal!]
+  tick: BigInt
+  tick_not: BigInt
+  tick_gt: BigInt
+  tick_lt: BigInt
+  tick_gte: BigInt
+  tick_lte: BigInt
+  tick_in: [BigInt!]
+  tick_not_in: [BigInt!]
+  feeGrowthGlobal0X128: BigInt
+  feeGrowthGlobal0X128_not: BigInt
+  feeGrowthGlobal0X128_gt: BigInt
+  feeGrowthGlobal0X128_lt: BigInt
+  feeGrowthGlobal0X128_gte: BigInt
+  feeGrowthGlobal0X128_lte: BigInt
+  feeGrowthGlobal0X128_in: [BigInt!]
+  feeGrowthGlobal0X128_not_in: [BigInt!]
+  feeGrowthGlobal1X128: BigInt
+  feeGrowthGlobal1X128_not: BigInt
+  feeGrowthGlobal1X128_gt: BigInt
+  feeGrowthGlobal1X128_lt: BigInt
+  feeGrowthGlobal1X128_gte: BigInt
+  feeGrowthGlobal1X128_lte: BigInt
+  feeGrowthGlobal1X128_in: [BigInt!]
+  feeGrowthGlobal1X128_not_in: [BigInt!]
+  tvlUSD: BigDecimal
+  tvlUSD_not: BigDecimal
+  tvlUSD_gt: BigDecimal
+  tvlUSD_lt: BigDecimal
+  tvlUSD_gte: BigDecimal
+  tvlUSD_lte: BigDecimal
+  tvlUSD_in: [BigDecimal!]
+  tvlUSD_not_in: [BigDecimal!]
+  volumeToken0: BigDecimal
+  volumeToken0_not: BigDecimal
+  volumeToken0_gt: BigDecimal
+  volumeToken0_lt: BigDecimal
+  volumeToken0_gte: BigDecimal
+  volumeToken0_lte: BigDecimal
+  volumeToken0_in: [BigDecimal!]
+  volumeToken0_not_in: [BigDecimal!]
+  volumeToken1: BigDecimal
+  volumeToken1_not: BigDecimal
+  volumeToken1_gt: BigDecimal
+  volumeToken1_lt: BigDecimal
+  volumeToken1_gte: BigDecimal
+  volumeToken1_lte: BigDecimal
+  volumeToken1_in: [BigDecimal!]
+  volumeToken1_not_in: [BigDecimal!]
+  volumeUSD: BigDecimal
+  volumeUSD_not: BigDecimal
+  volumeUSD_gt: BigDecimal
+  volumeUSD_lt: BigDecimal
+  volumeUSD_gte: BigDecimal
+  volumeUSD_lte: BigDecimal
+  volumeUSD_in: [BigDecimal!]
+  volumeUSD_not_in: [BigDecimal!]
+  feesUSD: BigDecimal
+  feesUSD_not: BigDecimal
+  feesUSD_gt: BigDecimal
+  feesUSD_lt: BigDecimal
+  feesUSD_gte: BigDecimal
+  feesUSD_lte: BigDecimal
+  feesUSD_in: [BigDecimal!]
+  feesUSD_not_in: [BigDecimal!]
+  txCount: BigInt
+  txCount_not: BigInt
+  txCount_gt: BigInt
+  txCount_lt: BigInt
+  txCount_gte: BigInt
+  txCount_lte: BigInt
+  txCount_in: [BigInt!]
+  txCount_not_in: [BigInt!]
+  open: BigDecimal
+  open_not: BigDecimal
+  open_gt: BigDecimal
+  open_lt: BigDecimal
+  open_gte: BigDecimal
+  open_lte: BigDecimal
+  open_in: [BigDecimal!]
+  open_not_in: [BigDecimal!]
+  high: BigDecimal
+  high_not: BigDecimal
+  high_gt: BigDecimal
+  high_lt: BigDecimal
+  high_gte: BigDecimal
+  high_lte: BigDecimal
+  high_in: [BigDecimal!]
+  high_not_in: [BigDecimal!]
+  low: BigDecimal
+  low_not: BigDecimal
+  low_gt: BigDecimal
+  low_lt: BigDecimal
+  low_gte: BigDecimal
+  low_lte: BigDecimal
+  low_in: [BigDecimal!]
+  low_not_in: [BigDecimal!]
+  close: BigDecimal
+  close_not: BigDecimal
+  close_gt: BigDecimal
+  close_lt: BigDecimal
+  close_gte: BigDecimal
+  close_lte: BigDecimal
+  close_in: [BigDecimal!]
+  close_not_in: [BigDecimal!]
+  _change_block: BlockChangedFilter
+  and: [PoolHourData_filter]
+  or: [PoolHourData_filter]
+}
+
 enum TickHourData_orderBy {
   id
   periodStartUnix
@@ -3551,10 +3567,6 @@ input TickHourData_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -3563,6 +3575,10 @@ input TickHourData_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   tick: String
   tick_not: String
@@ -3572,10 +3588,6 @@ input TickHourData_filter {
   tick_lte: String
   tick_in: [String!]
   tick_not_in: [String!]
-  tick_contains: String
-  tick_contains_nocase: String
-  tick_not_contains: String
-  tick_not_contains_nocase: String
   tick_starts_with: String
   tick_starts_with_nocase: String
   tick_not_starts_with: String
@@ -3584,6 +3596,10 @@ input TickHourData_filter {
   tick_ends_with_nocase: String
   tick_not_ends_with: String
   tick_not_ends_with_nocase: String
+  tick_contains: String
+  tick_not_contains: String
+  tick_contains_nocase: String
+  tick_not_contains_nocase: String
   tick_: Tick_filter
   liquidityGross: BigInt
   liquidityGross_not: BigInt
@@ -3725,10 +3741,6 @@ input TickDayData_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -3737,6 +3749,10 @@ input TickDayData_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   tick: String
   tick_not: String
@@ -3746,10 +3762,6 @@ input TickDayData_filter {
   tick_lte: String
   tick_in: [String!]
   tick_not_in: [String!]
-  tick_contains: String
-  tick_contains_nocase: String
-  tick_not_contains: String
-  tick_not_contains_nocase: String
   tick_starts_with: String
   tick_starts_with_nocase: String
   tick_not_starts_with: String
@@ -3758,6 +3770,10 @@ input TickDayData_filter {
   tick_ends_with_nocase: String
   tick_not_ends_with: String
   tick_not_ends_with_nocase: String
+  tick_contains: String
+  tick_not_contains: String
+  tick_contains_nocase: String
+  tick_not_contains_nocase: String
   tick_: Tick_filter
   liquidityGross: BigInt
   liquidityGross_not: BigInt
@@ -3885,10 +3901,6 @@ input TokenDayData_filter {
   token_lte: String
   token_in: [String!]
   token_not_in: [String!]
-  token_contains: String
-  token_contains_nocase: String
-  token_not_contains: String
-  token_not_contains_nocase: String
   token_starts_with: String
   token_starts_with_nocase: String
   token_not_starts_with: String
@@ -3897,6 +3909,10 @@ input TokenDayData_filter {
   token_ends_with_nocase: String
   token_not_ends_with: String
   token_not_ends_with_nocase: String
+  token_contains: String
+  token_not_contains: String
+  token_contains_nocase: String
+  token_not_contains_nocase: String
   token_: Token_filter
   volume: BigDecimal
   volume_not: BigDecimal
@@ -4048,10 +4064,6 @@ input TokenHourData_filter {
   token_lte: String
   token_in: [String!]
   token_not_in: [String!]
-  token_contains: String
-  token_contains_nocase: String
-  token_not_contains: String
-  token_not_contains_nocase: String
   token_starts_with: String
   token_starts_with_nocase: String
   token_not_starts_with: String
@@ -4060,6 +4072,10 @@ input TokenHourData_filter {
   token_ends_with_nocase: String
   token_not_ends_with: String
   token_not_ends_with_nocase: String
+  token_contains: String
+  token_not_contains: String
+  token_contains_nocase: String
+  token_not_contains_nocase: String
   token_: Token_filter
   volume: BigDecimal
   volume_not: BigDecimal
@@ -4262,10 +4278,6 @@ input IncreaseEvent_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -4274,6 +4286,10 @@ input IncreaseEvent_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   tokenID: BigInt
   tokenID_not: BigInt
@@ -4291,10 +4307,6 @@ input IncreaseEvent_filter {
   position_lte: String
   position_in: [String!]
   position_not_in: [String!]
-  position_contains: String
-  position_contains_nocase: String
-  position_not_contains: String
-  position_not_contains_nocase: String
   position_starts_with: String
   position_starts_with_nocase: String
   position_not_starts_with: String
@@ -4303,6 +4315,10 @@ input IncreaseEvent_filter {
   position_ends_with_nocase: String
   position_not_ends_with: String
   position_not_ends_with_nocase: String
+  position_contains: String
+  position_not_contains: String
+  position_contains_nocase: String
+  position_not_contains_nocase: String
   position_: Position_filter
   amount0: BigInt
   amount0_not: BigInt
@@ -4328,10 +4344,6 @@ input IncreaseEvent_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -4340,6 +4352,10 @@ input IncreaseEvent_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -4349,10 +4365,6 @@ input IncreaseEvent_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -4361,6 +4373,10 @@ input IncreaseEvent_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   timeStamp: BigInt
   timeStamp_not: BigInt
@@ -4378,10 +4394,6 @@ input IncreaseEvent_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -4390,6 +4402,10 @@ input IncreaseEvent_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   _change_block: BlockChangedFilter
   and: [IncreaseEvent_filter]
@@ -4504,10 +4520,6 @@ input DecreaseEvent_filter {
   pool_lte: String
   pool_in: [String!]
   pool_not_in: [String!]
-  pool_contains: String
-  pool_contains_nocase: String
-  pool_not_contains: String
-  pool_not_contains_nocase: String
   pool_starts_with: String
   pool_starts_with_nocase: String
   pool_not_starts_with: String
@@ -4516,6 +4528,10 @@ input DecreaseEvent_filter {
   pool_ends_with_nocase: String
   pool_not_ends_with: String
   pool_not_ends_with_nocase: String
+  pool_contains: String
+  pool_not_contains: String
+  pool_contains_nocase: String
+  pool_not_contains_nocase: String
   pool_: Pool_filter
   tokenID: BigInt
   tokenID_not: BigInt
@@ -4533,10 +4549,6 @@ input DecreaseEvent_filter {
   position_lte: String
   position_in: [String!]
   position_not_in: [String!]
-  position_contains: String
-  position_contains_nocase: String
-  position_not_contains: String
-  position_not_contains_nocase: String
   position_starts_with: String
   position_starts_with_nocase: String
   position_not_starts_with: String
@@ -4545,6 +4557,10 @@ input DecreaseEvent_filter {
   position_ends_with_nocase: String
   position_not_ends_with: String
   position_not_ends_with_nocase: String
+  position_contains: String
+  position_not_contains: String
+  position_contains_nocase: String
+  position_not_contains_nocase: String
   position_: Position_filter
   amount0: BigInt
   amount0_not: BigInt
@@ -4570,10 +4586,6 @@ input DecreaseEvent_filter {
   token0_lte: String
   token0_in: [String!]
   token0_not_in: [String!]
-  token0_contains: String
-  token0_contains_nocase: String
-  token0_not_contains: String
-  token0_not_contains_nocase: String
   token0_starts_with: String
   token0_starts_with_nocase: String
   token0_not_starts_with: String
@@ -4582,6 +4594,10 @@ input DecreaseEvent_filter {
   token0_ends_with_nocase: String
   token0_not_ends_with: String
   token0_not_ends_with_nocase: String
+  token0_contains: String
+  token0_not_contains: String
+  token0_contains_nocase: String
+  token0_not_contains_nocase: String
   token0_: Token_filter
   token1: String
   token1_not: String
@@ -4591,10 +4607,6 @@ input DecreaseEvent_filter {
   token1_lte: String
   token1_in: [String!]
   token1_not_in: [String!]
-  token1_contains: String
-  token1_contains_nocase: String
-  token1_not_contains: String
-  token1_not_contains_nocase: String
   token1_starts_with: String
   token1_starts_with_nocase: String
   token1_not_starts_with: String
@@ -4603,6 +4615,10 @@ input DecreaseEvent_filter {
   token1_ends_with_nocase: String
   token1_not_ends_with: String
   token1_not_ends_with_nocase: String
+  token1_contains: String
+  token1_not_contains: String
+  token1_contains_nocase: String
+  token1_not_contains_nocase: String
   token1_: Token_filter
   timeStamp: BigInt
   timeStamp_not: BigInt
@@ -4620,10 +4636,6 @@ input DecreaseEvent_filter {
   transaction_lte: String
   transaction_in: [String!]
   transaction_not_in: [String!]
-  transaction_contains: String
-  transaction_contains_nocase: String
-  transaction_not_contains: String
-  transaction_not_contains_nocase: String
   transaction_starts_with: String
   transaction_starts_with_nocase: String
   transaction_not_starts_with: String
@@ -4632,6 +4644,10 @@ input DecreaseEvent_filter {
   transaction_ends_with_nocase: String
   transaction_not_ends_with: String
   transaction_not_ends_with_nocase: String
+  transaction_contains: String
+  transaction_not_contains: String
+  transaction_contains_nocase: String
+  transaction_not_contains_nocase: String
   transaction_: Transaction_filter
   _change_block: BlockChangedFilter
   and: [DecreaseEvent_filter]
@@ -4712,9 +4728,9 @@ type Query {
   increaseEvents(block: Block_height, where: IncreaseEvent_filter, orderBy: IncreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [IncreaseEvent!]!
   decreaseEvent(id: ID!, block: Block_height): DecreaseEvent
   decreaseEvents(block: Block_height, where: DecreaseEvent_filter, orderBy: DecreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [DecreaseEvent!]!
-  getSyncStatus: SyncStatus
   getStateByCID(cid: String!): ResultState
   getState(blockHash: String!, contractAddress: String!, kind: String): ResultState
+  getSyncStatus: SyncStatus
   _meta(block: Block_height): _Meta_
 }
 
