@@ -1,5 +1,5 @@
-query pools($block: Block_height, $orderBy: Pool_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    pools(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query pools($block: Block_height, $where: Pool_filter, $orderBy: Pool_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    pools(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         createdAtTimestamp
         createdAtBlockNumber

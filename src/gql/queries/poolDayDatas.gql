@@ -1,5 +1,5 @@
-query poolDayDatas($block: Block_height, $orderBy: PoolDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    poolDayDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query poolDayDatas($block: Block_height, $where: PoolDayData_filter, $orderBy: PoolDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    poolDayDatas(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         date
         pool{

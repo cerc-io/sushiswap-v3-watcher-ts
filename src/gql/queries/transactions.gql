@@ -1,5 +1,5 @@
-query transactions($block: Block_height, $orderBy: Transaction_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    transactions(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query transactions($block: Block_height, $where: Transaction_filter, $orderBy: Transaction_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    transactions(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         blockNumber
         timestamp

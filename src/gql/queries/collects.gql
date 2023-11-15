@@ -1,5 +1,5 @@
-query collects($block: Block_height, $orderBy: Collect_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    collects(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query collects($block: Block_height, $where: Collect_filter, $orderBy: Collect_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    collects(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         transaction{
             id

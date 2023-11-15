@@ -1,5 +1,5 @@
-query tickDayDatas($block: Block_height, $orderBy: TickDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    tickDayDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query tickDayDatas($block: Block_height, $where: TickDayData_filter, $orderBy: TickDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    tickDayDatas(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         date
         pool{

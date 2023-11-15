@@ -1,5 +1,5 @@
-query tokenHourDatas($block: Block_height, $orderBy: TokenHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    tokenHourDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query tokenHourDatas($block: Block_height, $where: TokenHourData_filter, $orderBy: TokenHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    tokenHourDatas(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         periodStartUnix
         token{

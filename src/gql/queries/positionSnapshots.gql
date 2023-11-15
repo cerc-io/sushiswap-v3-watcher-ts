@@ -1,5 +1,5 @@
-query positionSnapshots($block: Block_height, $orderBy: PositionSnapshot_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    positionSnapshots(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query positionSnapshots($block: Block_height, $where: PositionSnapshot_filter, $orderBy: PositionSnapshot_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    positionSnapshots(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         owner
         pool{

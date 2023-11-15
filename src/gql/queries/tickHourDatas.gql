@@ -1,5 +1,5 @@
-query tickHourDatas($block: Block_height, $orderBy: TickHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    tickHourDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query tickHourDatas($block: Block_height, $where: TickHourData_filter, $orderBy: TickHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    tickHourDatas(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         periodStartUnix
         pool{

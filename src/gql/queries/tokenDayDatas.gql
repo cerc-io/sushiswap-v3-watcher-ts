@@ -1,5 +1,5 @@
-query tokenDayDatas($block: Block_height, $orderBy: TokenDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    tokenDayDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query tokenDayDatas($block: Block_height, $where: TokenDayData_filter, $orderBy: TokenDayData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    tokenDayDatas(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         date
         token{
