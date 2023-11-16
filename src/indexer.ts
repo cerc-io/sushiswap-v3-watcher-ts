@@ -97,7 +97,7 @@ export class Indexer implements IndexerInterface {
   _abiMap: Map<string, JsonFragment[]>;
   _storageLayoutMap: Map<string, StorageLayout>;
   _contractMap: Map<string, ethers.utils.Interface>;
-  _eventSignaturesMap: Map<string, string[]>;
+  eventSignaturesMap: Map<string, string[]>;
 
   _entityTypesMap: Map<string, { [key: string]: string }>;
   _relationsMap: Map<any, { [key: string]: any }>;
@@ -130,7 +130,7 @@ export class Indexer implements IndexerInterface {
     this._abiMap = new Map();
     this._storageLayoutMap = new Map();
     this._contractMap = new Map();
-    this._eventSignaturesMap = new Map();
+    this.eventSignaturesMap = new Map();
     let contractInterface: ethers.utils.Interface;
     let eventSignatures: string[];
 
@@ -149,7 +149,7 @@ export class Indexer implements IndexerInterface {
     eventSignatures = Object.values(contractInterface.events).map(value => {
       return contractInterface.getEventTopic(value);
     });
-    this._eventSignaturesMap.set(KIND_FACTORY, eventSignatures);
+    this.eventSignaturesMap.set(KIND_FACTORY, eventSignatures);
 
     assert(NonfungiblePositionManagerABI);
     this._abiMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, NonfungiblePositionManagerABI);
@@ -160,7 +160,7 @@ export class Indexer implements IndexerInterface {
     eventSignatures = Object.values(contractInterface.events).map(value => {
       return contractInterface.getEventTopic(value);
     });
-    this._eventSignaturesMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, eventSignatures);
+    this.eventSignaturesMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, eventSignatures);
 
     assert(PoolABI);
     this._abiMap.set(KIND_POOL, PoolABI);
@@ -171,7 +171,7 @@ export class Indexer implements IndexerInterface {
     eventSignatures = Object.values(contractInterface.events).map(value => {
       return contractInterface.getEventTopic(value);
     });
-    this._eventSignaturesMap.set(KIND_POOL, eventSignatures);
+    this.eventSignaturesMap.set(KIND_POOL, eventSignatures);
 
     this._entityTypesMap = new Map();
     this._populateEntityTypesMap();
@@ -563,7 +563,7 @@ export class Indexer implements IndexerInterface {
   }
 
   async fetchEventsAndSaveBlocks (blocks: DeepPartial<BlockProgress>[]): Promise<{ blockProgress: BlockProgress, events: DeepPartial<Event>[] }[]> {
-    return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+    return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this.eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
   async fetchAndSaveFilteredEventsAndBlocks (startBlock: number, endBlock: number): Promise<{
@@ -572,11 +572,11 @@ export class Indexer implements IndexerInterface {
     ethFullBlock: EthFullBlock;
     ethFullTransactions: EthFullTransaction[];
   }[]> {
-    return this._baseIndexer.fetchAndSaveFilteredEventsAndBlocks(startBlock, endBlock, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+    return this._baseIndexer.fetchAndSaveFilteredEventsAndBlocks(startBlock, endBlock, this.eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
   async fetchEventsForContracts (blockHash: string, blockNumber: number, addresses: string[]): Promise<DeepPartial<Event>[]> {
-    return this._baseIndexer.fetchEventsForContracts(blockHash, blockNumber, addresses, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+    return this._baseIndexer.fetchEventsForContracts(blockHash, blockNumber, addresses, this.eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
   async saveBlockAndFetchEvents (block: DeepPartial<BlockProgress>): Promise<[
@@ -1385,7 +1385,7 @@ export class Indexer implements IndexerInterface {
     assert(blockHash);
     assert(blockNumber);
 
-    const { events: dbEvents, transactions } = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this._eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+    const { events: dbEvents, transactions } = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this.eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
 
     const dbTx = await this._db.createTransactionRunner();
     try {
