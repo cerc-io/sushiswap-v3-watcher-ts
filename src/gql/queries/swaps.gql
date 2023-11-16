@@ -1,5 +1,5 @@
-query swaps($block: Block_height, $orderBy: Swap_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    swaps(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query swaps($block: Block_height, $where: Swap_filter, $orderBy: Swap_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    swaps(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         transaction{
             id

@@ -1,5 +1,5 @@
-query tokens($block: Block_height, $orderBy: Token_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    tokens(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query tokens($block: Block_height, $where: Token_filter, $orderBy: Token_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    tokens(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         symbol
         name

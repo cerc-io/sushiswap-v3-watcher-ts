@@ -1,5 +1,5 @@
-query poolHourDatas($block: Block_height, $orderBy: PoolHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    poolHourDatas(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query poolHourDatas($block: Block_height, $where: PoolHourData_filter, $orderBy: PoolHourData_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    poolHourDatas(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         periodStartUnix
         pool{

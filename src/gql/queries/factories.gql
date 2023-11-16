@@ -1,5 +1,5 @@
-query factories($block: Block_height, $orderBy: Factory_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    factories(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query factories($block: Block_height, $where: Factory_filter, $orderBy: Factory_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    factories(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         poolCount
         txCount

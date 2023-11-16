@@ -1,5 +1,5 @@
-query ticks($block: Block_height, $orderBy: Tick_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    ticks(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query ticks($block: Block_height, $where: Tick_filter, $orderBy: Tick_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    ticks(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         poolAddress
         tickIdx

@@ -1,5 +1,5 @@
-query decreaseEvents($block: Block_height, $orderBy: DecreaseEvent_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    decreaseEvents(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query decreaseEvents($block: Block_height, $where: DecreaseEvent_filter, $orderBy: DecreaseEvent_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    decreaseEvents(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         pool{
             id

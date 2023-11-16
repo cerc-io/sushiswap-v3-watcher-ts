@@ -1,5 +1,5 @@
-query burns($block: Block_height, $orderBy: Burn_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
-    burns(block: $block, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
+query burns($block: Block_height, $where: Burn_filter, $orderBy: Burn_orderBy, $orderDirection: OrderDirection, $first: Int, $skip: Int){
+    burns(block: $block, where: $where, orderBy: $orderBy, orderDirection: $orderDirection, first: $first, skip: $skip){
         id
         transaction{
             id
