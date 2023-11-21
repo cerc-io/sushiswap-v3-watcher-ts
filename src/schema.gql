@@ -4654,6 +4654,18 @@ input DecreaseEvent_filter {
   or: [DecreaseEvent_filter]
 }
 
+type _MetaBlock_ {
+  hash: Bytes
+  number: Int!
+  timestamp: Int
+}
+
+type _Meta_ {
+  block: _MetaBlock_!
+  deployment: String!
+  hasIndexingErrors: Boolean!
+}
+
 type ResultState {
   block: _Block_!
   contractAddress: String!
@@ -4667,18 +4679,6 @@ type SyncStatus {
   latestIndexedBlockNumber: Int!
   latestCanonicalBlockHash: String!
   latestCanonicalBlockNumber: Int!
-}
-
-type _MetaBlock_ {
-  hash: Bytes
-  number: Int!
-  timestamp: Int
-}
-
-type _Meta_ {
-  block: _MetaBlock_!
-  deployment: String!
-  hasIndexingErrors: Boolean!
 }
 
 type Query {
@@ -4728,10 +4728,10 @@ type Query {
   increaseEvents(block: Block_height, where: IncreaseEvent_filter, orderBy: IncreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [IncreaseEvent!]!
   decreaseEvent(id: ID!, block: Block_height): DecreaseEvent
   decreaseEvents(block: Block_height, where: DecreaseEvent_filter, orderBy: DecreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [DecreaseEvent!]!
+  _meta(block: Block_height): _Meta_
   getStateByCID(cid: String!): ResultState
   getState(blockHash: String!, contractAddress: String!, kind: String): ResultState
   getSyncStatus: SyncStatus
-  _meta(block: Block_height): _Meta_
 }
 
 type Factory {

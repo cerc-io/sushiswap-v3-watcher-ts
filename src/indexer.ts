@@ -20,6 +20,7 @@ import {
   Where,
   QueryOptions,
   BlockHeight,
+  ResultMeta,
   updateSubgraphState,
   dumpSubgraphState,
   GraphWatcherInterface,
@@ -31,7 +32,6 @@ import {
   Clients,
   EthClient,
   UpstreamConfig,
-  ResultMeta,
   EthFullBlock,
   EthFullTransaction,
   ExtraEventData
@@ -131,8 +131,6 @@ export class Indexer implements IndexerInterface {
     this._storageLayoutMap = new Map();
     this._contractMap = new Map();
     this.eventSignaturesMap = new Map();
-    let contractInterface: ethers.utils.Interface;
-    let eventSignatures: string[];
 
     const { abi: FactoryABI } = FactoryArtifacts;
 
@@ -143,35 +141,35 @@ export class Indexer implements IndexerInterface {
     assert(FactoryABI);
     this._abiMap.set(KIND_FACTORY, FactoryABI);
 
-    contractInterface = new ethers.utils.Interface(FactoryABI);
-    this._contractMap.set(KIND_FACTORY, contractInterface);
+    const FactoryContractInterface = new ethers.utils.Interface(FactoryABI);
+    this._contractMap.set(KIND_FACTORY, FactoryContractInterface);
 
-    eventSignatures = Object.values(contractInterface.events).map(value => {
-      return contractInterface.getEventTopic(value);
+    const FactoryEventSignatures = Object.values(FactoryContractInterface.events).map(value => {
+      return FactoryContractInterface.getEventTopic(value);
     });
-    this.eventSignaturesMap.set(KIND_FACTORY, eventSignatures);
+    this.eventSignaturesMap.set(KIND_FACTORY, FactoryEventSignatures);
 
     assert(NonfungiblePositionManagerABI);
     this._abiMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, NonfungiblePositionManagerABI);
 
-    contractInterface = new ethers.utils.Interface(NonfungiblePositionManagerABI);
-    this._contractMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, contractInterface);
+    const NonfungiblePositionManagerContractInterface = new ethers.utils.Interface(NonfungiblePositionManagerABI);
+    this._contractMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, NonfungiblePositionManagerContractInterface);
 
-    eventSignatures = Object.values(contractInterface.events).map(value => {
-      return contractInterface.getEventTopic(value);
+    const NonfungiblePositionManagerEventSignatures = Object.values(NonfungiblePositionManagerContractInterface.events).map(value => {
+      return NonfungiblePositionManagerContractInterface.getEventTopic(value);
     });
-    this.eventSignaturesMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, eventSignatures);
+    this.eventSignaturesMap.set(KIND_NONFUNGIBLEPOSITIONMANAGER, NonfungiblePositionManagerEventSignatures);
 
     assert(PoolABI);
     this._abiMap.set(KIND_POOL, PoolABI);
 
-    contractInterface = new ethers.utils.Interface(PoolABI);
-    this._contractMap.set(KIND_POOL, contractInterface);
+    const PoolContractInterface = new ethers.utils.Interface(PoolABI);
+    this._contractMap.set(KIND_POOL, PoolContractInterface);
 
-    eventSignatures = Object.values(contractInterface.events).map(value => {
-      return contractInterface.getEventTopic(value);
+    const PoolEventSignatures = Object.values(PoolContractInterface.events).map(value => {
+      return PoolContractInterface.getEventTopic(value);
     });
-    this.eventSignaturesMap.set(KIND_POOL, eventSignatures);
+    this.eventSignaturesMap.set(KIND_POOL, PoolEventSignatures);
 
     this._entityTypesMap = new Map();
     this._populateEntityTypesMap();
@@ -351,6 +349,7 @@ export class Indexer implements IndexerInterface {
     return this._graphWatcher.getEntities(entity, this._relationsMap, block, where, queryOptions, selections);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async triggerIndexingOnEvent (event: Event, extraData: ExtraEventData): Promise<void> {
     const resultEvent = this.getResultEvent(event);
 
@@ -471,8 +470,8 @@ export class Indexer implements IndexerInterface {
     await this._graphWatcher.addContracts();
   }
 
-  async watchContract (address: string, kind: string, checkpoint: boolean, startingBlock: number): Promise<void> {
-    return this._baseIndexer.watchContract(address, kind, checkpoint, startingBlock);
+  async watchContract (address: string, kind: string, checkpoint: boolean, startingBlock: number, context?: any): Promise<void> {
+    return this._baseIndexer.watchContract(address, kind, checkpoint, startingBlock, context);
   }
 
   updateStateStatusMap (address: string, stateStatus: StateStatus): void {
@@ -560,10 +559,6 @@ export class Indexer implements IndexerInterface {
 
   async getBlocksAtHeight (height: number, isPruned: boolean): Promise<BlockProgress[]> {
     return this._baseIndexer.getBlocksAtHeight(height, isPruned);
-  }
-
-  async fetchEventsAndSaveBlocks (blocks: DeepPartial<BlockProgress>[]): Promise<{ blockProgress: BlockProgress, events: DeepPartial<Event>[] }[]> {
-    return this._baseIndexer.fetchEventsAndSaveBlocks(blocks, this.eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
   }
 
   async fetchAndSaveFilteredEventsAndBlocks (startBlock: number, endBlock: number): Promise<{
