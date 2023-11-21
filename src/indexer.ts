@@ -471,8 +471,8 @@ export class Indexer implements IndexerInterface {
     await this._graphWatcher.addContracts();
   }
 
-  async watchContract (address: string, kind: string, checkpoint: boolean, startingBlock: number): Promise<void> {
-    return this._baseIndexer.watchContract(address, kind, checkpoint, startingBlock);
+  async watchContract (address: string, kind: string, checkpoint: boolean, startingBlock: number, context?: any): Promise<void> {
+    return this._baseIndexer.watchContract(address, kind, checkpoint, startingBlock, context);
   }
 
   updateStateStatusMap (address: string, stateStatus: StateStatus): void {
