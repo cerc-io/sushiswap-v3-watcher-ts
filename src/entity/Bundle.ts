@@ -23,4 +23,7 @@ export class Bundle {
 
   @Column('boolean', { default: false })
     isPruned!: boolean;
+
+  @Column('boolean', { default: false })
+    isRemoved!: boolean;
 }

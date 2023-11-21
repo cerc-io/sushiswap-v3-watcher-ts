@@ -59,4 +59,7 @@ export class TokenHourData {
 
   @Column('boolean', { default: false })
     isPruned!: boolean;
+
+  @Column('boolean', { default: false })
+    isRemoved!: boolean;
 }
