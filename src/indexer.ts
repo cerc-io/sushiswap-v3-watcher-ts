@@ -376,10 +376,10 @@ export class Indexer implements IndexerInterface {
     this._graphWatcher.updateEntityCacheFrothyBlocks(blockProgress);
   }
 
-  async processBlockAfterEvents (blockHash: string, blockNumber: number): Promise<void> {
+  async processBlockAfterEvents (blockHash: string, blockNumber: number, extraData: ExtraEventData): Promise<void> {
     console.time('time:indexer#processBlockAfterEvents-mapping_code');
     // Call subgraph handler for block.
-    await this._graphWatcher.handleBlock(blockHash, blockNumber);
+    await this._graphWatcher.handleBlock(blockHash, blockNumber, extraData);
     console.timeEnd('time:indexer#processBlockAfterEvents-mapping_code');
 
     console.time('time:indexer#processBlockAfterEvents-dump_subgraph_state');
@@ -543,6 +543,10 @@ export class Indexer implements IndexerInterface {
 
   async updateSyncStatusIndexingError (hasIndexingError: boolean): Promise<SyncStatus | undefined> {
     return this._baseIndexer.updateSyncStatusIndexingError(hasIndexingError);
+  }
+
+  async updateSyncStatus (syncStatus: DeepPartial<SyncStatus>): Promise<SyncStatus> {
+    return this._baseIndexer.updateSyncStatus(syncStatus);
   }
 
   async getEvent (id: string): Promise<Event | undefined> {
