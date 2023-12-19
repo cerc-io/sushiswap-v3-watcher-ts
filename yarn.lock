@@ -175,10 +175,10 @@
     binaryen "101.0.0-nightly.20210723"
     long "^4.0.0"
 
-"@cerc-io/cache@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fcache/-/0.2.77/cache-0.2.77.tgz#2cdc60fcd1806ba7e8ac01a0a70664bb9903c705"
-  integrity sha512-ojTfOn+2aTiThZgpIYjL7f31lgiSjal9lOrQViAFdSFOjMXYO3bAkKeKyWtE/wQnRW5UfFSrTDTO2UpqTUfi3g==
+"@cerc-io/cache@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fcache/-/0.2.79/cache-0.2.79.tgz#15a3af632bad86e140a30268eb43e6847324ecc3"
+  integrity sha512-hPA7GWjMmn/3u7m9wW3Z7n578WruVt2py93UHXSPH9/sVX+upcQsjusmEx17I+ustqW/XFbAi6hsqiNYGa4JHQ==
   dependencies:
     canonical-json "^0.0.4"
     debug "^4.3.1"
@@ -186,19 +186,19 @@
     fs-extra "^10.0.0"
     level "^7.0.0"
 
-"@cerc-io/cli@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fcli/-/0.2.77/cli-0.2.77.tgz#deacb4c15a1bbe772d895622e6e53a36db5dd4ca"
-  integrity sha512-CQzpfdbn3luvjPIOtwrBzuCjt5e9l5buwOXANbiPdd+hhEVrm5bCWeETIjxFEb+A7rXtf0qfKxZBkNGbCKWKfA==
+"@cerc-io/cli@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fcli/-/0.2.79/cli-0.2.79.tgz#29436f57aaaea556ab6e84910b7193bfdfd8b651"
+  integrity sha512-A8ttmf78d3dZRsM5a6wqhFbejFMwQ8BeQcNsQgcHasKmYHmKFHG4ujT25jnHHFidodGlPHI+KpI5DhdDC/YWEA==
   dependencies:
     "@apollo/client" "^3.7.1"
-    "@cerc-io/cache" "^0.2.77"
-    "@cerc-io/ipld-eth-client" "^0.2.77"
+    "@cerc-io/cache" "^0.2.79"
+    "@cerc-io/ipld-eth-client" "^0.2.79"
     "@cerc-io/libp2p" "^0.42.2-laconic-0.1.4"
     "@cerc-io/nitro-node" "^0.1.15"
-    "@cerc-io/peer" "^0.2.77"
-    "@cerc-io/rpc-eth-client" "^0.2.77"
-    "@cerc-io/util" "^0.2.77"
+    "@cerc-io/peer" "^0.2.79"
+    "@cerc-io/rpc-eth-client" "^0.2.79"
+    "@cerc-io/util" "^0.2.79"
     "@ethersproject/providers" "^5.4.4"
     "@graphql-tools/utils" "^9.1.1"
     "@ipld/dag-cbor" "^8.0.0"
@@ -207,23 +207,28 @@
     debug "^4.3.1"
     ethers "^5.4.4"
     express "^4.18.2"
+    graphql "^15.5.0"
+    graphql-request "^6.1.0"
     graphql-subscriptions "^2.0.0"
+    http-proxy-middleware "^2.0.6"
+    js-yaml "^4.0.0"
+    json-diff "^0.5.4"
     lodash "^4.17.21"
     pluralize "^8.0.0"
     reflect-metadata "^0.1.13"
     typeorm "0.2.37"
     yargs "^17.0.1"
 
-"@cerc-io/graph-node@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fgraph-node/-/0.2.77/graph-node-0.2.77.tgz#ffbdebd108447e416be5e8d00903ae9820ee2fd7"
-  integrity sha512-gS7ZRdfNcjZ6eTwalKwBcYiPyhPRhjHFl7tAMnDazRS0ITznZHdWuaaorMF2Vf/PMX3Efetnf7tMfDdjh2GgDA==
+"@cerc-io/graph-node@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fgraph-node/-/0.2.79/graph-node-0.2.79.tgz#cbfd0f9975031b63c96c93f8c2e636d7ce9b983f"
+  integrity sha512-z5+R3VqKrkBXkM3jx+B1g44vQ98SJdMf9p3TaswwmXmXSqT2HaTPoOpSx8TSDdJlGUyc/vPVKi2ttngbeEfxeQ==
   dependencies:
     "@apollo/client" "^3.3.19"
     "@cerc-io/assemblyscript" "0.19.10-watcher-ts-0.1.2"
-    "@cerc-io/cache" "^0.2.77"
-    "@cerc-io/ipld-eth-client" "^0.2.77"
-    "@cerc-io/util" "^0.2.77"
+    "@cerc-io/cache" "^0.2.79"
+    "@cerc-io/ipld-eth-client" "^0.2.79"
+    "@cerc-io/util" "^0.2.79"
     "@types/json-diff" "^0.5.2"
     "@types/yargs" "^17.0.0"
     bn.js "^4.11.9"
@@ -240,14 +245,14 @@
     typeorm-naming-strategies "^2.0.0"
     yargs "^17.0.1"
 
-"@cerc-io/ipld-eth-client@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fipld-eth-client/-/0.2.77/ipld-eth-client-0.2.77.tgz#ea5b7124daee1dbcdf951b0363f0c0b359b2fc8f"
-  integrity sha512-UtrH8QofLQnCvyLVtaFfO2/Wd0KyObRppMs057ppvQpBYX0P0pejOBBy9u4bQZAX0PZRJps1SassQx2QjBD3Dg==
+"@cerc-io/ipld-eth-client@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fipld-eth-client/-/0.2.79/ipld-eth-client-0.2.79.tgz#1e171212931b554aeabcbe3c046d3fe896ffa631"
+  integrity sha512-TJR7blk9TxU/XBHX8t5Rla9fWE2+0SIt4f+/ymWhQJa35vkGSA+mvnO5rtmvuQMc0sGJmEN90k9/uWhT94P+1A==
   dependencies:
     "@apollo/client" "^3.7.1"
-    "@cerc-io/cache" "^0.2.77"
-    "@cerc-io/util" "^0.2.77"
+    "@cerc-io/cache" "^0.2.79"
+    "@cerc-io/util" "^0.2.79"
     cross-fetch "^3.1.4"
     debug "^4.3.1"
     ethers "^5.4.4"
@@ -400,10 +405,10 @@
     unique-names-generator "^4.7.1"
     yargs "^17.0.1"
 
-"@cerc-io/peer@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fpeer/-/0.2.77/peer-0.2.77.tgz#8c9b6b8b68fb7d058ea171307296c1c99cfdfd9f"
-  integrity sha512-1qUJEm81TCkDP+MW/d5x8XEs+NbJmI6Qp9AJkRZ7G9Yh2wuca2sC/m0iGCZn+7SOqJeuHANvDkvnsC4aj8teyw==
+"@cerc-io/peer@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fpeer/-/0.2.79/peer-0.2.79.tgz#a2e6129a53e8a43ecbf0f1e4f0dd823bd685639e"
+  integrity sha512-J1f9pp3A1++Q1N9R05MOnmOLCejmF4tBQbOu9ZIgL2+nHyITaxQ8ktqt+L7v33aCas9zG+koDMq0tukGxoB3sw==
   dependencies:
     "@cerc-io/libp2p" "^0.42.2-laconic-0.1.4"
     "@cerc-io/prometheus-metrics" "1.1.4"
@@ -442,23 +447,23 @@
     it-stream-types "^1.0.4"
     promjs "^0.4.2"
 
-"@cerc-io/rpc-eth-client@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Frpc-eth-client/-/0.2.77/rpc-eth-client-0.2.77.tgz#fe11c3c9feb565f3670fd811c908132d0968d348"
-  integrity sha512-Nm8mt4w38sBmWEviFnH30PkFK53HrDykmpS6A16rL8sD/VC6nmb40YieLx/47pVPYYHs+6Z6FoWVcSNP42hKGQ==
+"@cerc-io/rpc-eth-client@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Frpc-eth-client/-/0.2.79/rpc-eth-client-0.2.79.tgz#5797e713593626897f625247bc93b852d8ac83c8"
+  integrity sha512-pjyLTjp8h9zMG/nojV7FAJSvtuAADVu+6W9fPsHM1K44UhQqWCGYDP3ZSFlc9/7Es1f3JW4W85bH5zUWIL1+wA==
   dependencies:
-    "@cerc-io/cache" "^0.2.77"
-    "@cerc-io/ipld-eth-client" "^0.2.77"
-    "@cerc-io/util" "^0.2.77"
+    "@cerc-io/cache" "^0.2.79"
+    "@cerc-io/ipld-eth-client" "^0.2.79"
+    "@cerc-io/util" "^0.2.79"
     chai "^4.3.4"
     ethers "^5.4.4"
     left-pad "^1.3.0"
     mocha "^8.4.0"
 
-"@cerc-io/solidity-mapper@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fsolidity-mapper/-/0.2.77/solidity-mapper-0.2.77.tgz#d3d11ed9f47de76482978a8291fce40ba257bc74"
-  integrity sha512-EC2qgVOlvi1V6NGr3bw5+L9quKpmgRsO19LsyyV90Zc7+hq2UAGedZktr6y2NiFagfMFOQghXOtCXx3ZVmUYow==
+"@cerc-io/solidity-mapper@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fsolidity-mapper/-/0.2.79/solidity-mapper-0.2.79.tgz#58fa0ef20a365218f1b4653dad2fd9cb42eb4cdc"
+  integrity sha512-YG9eR2TpnEX2VBRXzMYkdP7XrbULBZboeZ+AUD5vWr5d7GvTYYL0PDSorEnVwrJGUmJ4ea5oqsjmCn+2etW3eA==
   dependencies:
     dotenv "^10.0.0"
 
@@ -467,15 +472,15 @@
   resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Fts-channel/-/1.0.3-ts-nitro-0.1.1/ts-channel-1.0.3-ts-nitro-0.1.1.tgz#0768781313a167295c0bf21307f47e02dc17e936"
   integrity sha512-2jFICUSyffuZ+8+qRhXuLSJq4GJ6Y02wxiXoubH0Kzv2lIKkJtWICY1ZQQhtXAvP0ncAQB85WJHqtqwH8l7J3Q==
 
-"@cerc-io/util@^0.2.77":
-  version "0.2.77"
-  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Futil/-/0.2.77/util-0.2.77.tgz#6aab112b4c0949f22204f5246040fbd766b087c3"
-  integrity sha512-94pFki/NXswGciSp/fK7nO0gz/8jrx3Wgaih9HnIN8gLnm0tbz9asTkGDQwvBE9wEvXEMpW3qFubw5zHszCpvg==
+"@cerc-io/util@^0.2.79":
+  version "0.2.79"
+  resolved "https://git.vdb.to/api/packages/cerc-io/npm/%40cerc-io%2Futil/-/0.2.79/util-0.2.79.tgz#f4c1aa85fc97202097bc5ef605da6cb3ef1ce102"
+  integrity sha512-Nbb4ff9/ozOxPKswaUifDhj3heWdk2nKqTPUGUPVnVm7pMEpCCJPq1C/oW128Jw3J+EJxTbBvWifpLBbPePasw==
   dependencies:
     "@apollo/utils.keyvaluecache" "^1.0.1"
     "@cerc-io/nitro-node" "^0.1.15"
-    "@cerc-io/peer" "^0.2.77"
-    "@cerc-io/solidity-mapper" "^0.2.77"
+    "@cerc-io/peer" "^0.2.79"
+    "@cerc-io/solidity-mapper" "^0.2.79"
     "@cerc-io/ts-channel" "1.0.3-ts-nitro-0.1.1"
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/providers" "^5.4.4"
@@ -1048,7 +1053,7 @@
     "@graphql-typed-document-node/core" "^3.1.1"
     tslib "^2.4.0"
 
-"@graphql-typed-document-node/core@^3.1.1":
+"@graphql-typed-document-node/core@^3.1.1", "@graphql-typed-document-node/core@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.2.0.tgz#5f3d96ec6b2354ad6d8a28bf216a1d97b5426861"
   integrity sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==
@@ -2088,6 +2093,13 @@
   resolved "https://registry.yarnpkg.com/@types/http-errors/-/http-errors-2.0.3.tgz#c54e61f79b3947d040f150abd58f71efb422ff62"
   integrity sha512-pP0P/9BnCj1OVvQR2lF41EkDG/lWWnDyA203b/4Fmi2eTyORnBtcDoKDwjWQthELrBvWkMOrvSOnZ8OVlW6tXA==
 
+"@types/http-proxy@^1.17.8":
+  version "1.17.14"
+  resolved "https://registry.yarnpkg.com/@types/http-proxy/-/http-proxy-1.17.14.tgz#57f8ccaa1c1c3780644f8a94f9c6b5000b5e2eec"
+  integrity sha512-SSrD0c1OQzlFX7pGu1eXxSEjemej64aaNPRhhVYUGqXh0BtldAAx37MG8btcumvpgKyZp1F5Gn3JkktdxiFv6w==
+  dependencies:
+    "@types/node" "*"
+
 "@types/json-bigint@^1.0.0":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@types/json-bigint/-/json-bigint-1.0.3.tgz#44ad75a013f2845d86fafaf983bd95b391a3fba6"
@@ -3077,7 +3089,7 @@ cron-parser@^4.0.0:
   dependencies:
     luxon "^3.2.1"
 
-cross-fetch@^3.1.4:
+cross-fetch@^3.1.4, cross-fetch@^3.1.5:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.8.tgz#0327eba65fd68a7d119f8fb2bf9334a1a7956f82"
   integrity sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==
@@ -3700,6 +3712,11 @@ event-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/event-iterator/-/event-iterator-2.0.0.tgz#10f06740cc1e9fd6bc575f334c2bc1ae9d2dbf62"
   integrity sha512-KGft0ldl31BZVV//jj+IAIGCxkvvUkkON+ScH6zfoX+l+omX6001ggyRSpI0Io2Hlro0ThXotswCtfzS8UkIiQ==
 
+eventemitter3@^4.0.0:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
+  integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
+
 eventemitter3@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-5.0.1.tgz#53f5ffd0a492ac800721bb42c66b841de96423c4"
@@ -3874,6 +3891,11 @@ flatted@^3.2.9:
   version "3.2.9"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.9.tgz#7eb4c67ca1ba34232ca9d2d93e9886e611ad7daf"
   integrity sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==
+
+follow-redirects@^1.0.0:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
+  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
 
 for-each@^0.3.3:
   version "0.3.3"
@@ -4076,6 +4098,14 @@ graphemer@^1.4.0:
   resolved "https://registry.yarnpkg.com/graphemer/-/graphemer-1.4.0.tgz#fb2f1d55e0e3a1849aeffc90c4fa0dd53a0e66c6"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
 
+graphql-request@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-6.1.0.tgz#f4eb2107967af3c7a5907eb3131c671eac89be4f"
+  integrity sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.2.0"
+    cross-fetch "^3.1.5"
+
 graphql-subscriptions@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-2.0.0.tgz#11ec181d475852d8aec879183e8e1eb94f2eb79a"
@@ -4216,6 +4246,26 @@ http-errors@2.0.0:
     setprototypeof "1.2.0"
     statuses "2.0.1"
     toidentifier "1.0.1"
+
+http-proxy-middleware@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/http-proxy-middleware/-/http-proxy-middleware-2.0.6.tgz#e1a4dd6979572c7ab5a4e4b55095d1f32a74963f"
+  integrity sha512-ya/UeJ6HVBYxrgYotAZo1KvPWlgB48kUJLDePFeneHsVujFaW5WNj2NgWCAE//B1Dl02BIfYlpNgBy8Kf8Rjmw==
+  dependencies:
+    "@types/http-proxy" "^1.17.8"
+    http-proxy "^1.18.1"
+    is-glob "^4.0.1"
+    is-plain-obj "^3.0.0"
+    micromatch "^4.0.2"
+
+http-proxy@^1.18.1:
+  version "1.18.1"
+  resolved "https://registry.yarnpkg.com/http-proxy/-/http-proxy-1.18.1.tgz#401541f0534884bbf95260334e72f88ee3976549"
+  integrity sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==
+  dependencies:
+    eventemitter3 "^4.0.0"
+    follow-redirects "^1.0.0"
+    requires-port "^1.0.0"
 
 human-signals@^4.3.0:
   version "4.3.1"
@@ -4587,6 +4637,11 @@ is-plain-obj@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
   integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
+
+is-plain-obj@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-3.0.0.tgz#af6f2ea14ac5a646183a5bbdb5baabbc156ad9d7"
+  integrity sha512-gwsOE28k+23GP1B6vFl1oVh/WOzmawBrKwo5Ev6wMKzPkaXaCDIQKzLnvsA42DRlbVTWorkgTKIviAKCWkfUwA==
 
 is-plain-object@^2.0.1:
   version "2.0.4"
@@ -5250,7 +5305,7 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==
 
-micromatch@^4.0.4:
+micromatch@^4.0.2, micromatch@^4.0.4:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-4.0.5.tgz#bc8999a7cbbf77cdc89f132f6e467051b49090c6"
   integrity sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==
@@ -6199,6 +6254,11 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==
+
+requires-port@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+  integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
 resolve-from@^4.0.0:
   version "4.0.0"
