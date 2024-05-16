@@ -59,7 +59,7 @@
 [upstream]
   [upstream.ethServer]
     # gqlApiEndpoint = "http://127.0.0.1:8082/graphql"
-    rpcProviderEndpoint = [
+    rpcProviderEndpoints = [
       "http://127.0.0.1:8081"
     ]
 
@@ -70,9 +70,9 @@
     isFEVM = true
 
     # Boolean flag to filter event logs by contracts
-    filterLogsByAddresses = false
+    filterLogsByAddresses = true
     # Boolean flag to filter event logs by topics
-    filterLogsByTopics = false
+    filterLogsByTopics = true
 
   [upstream.cache]
     name = "requests"
