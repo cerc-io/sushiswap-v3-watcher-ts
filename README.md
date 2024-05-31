@@ -1,5 +1,10 @@
 # sushiswap-v3-watcher-ts
 
+## Source
+
+* Subgraph: [sushiswap-subgraphs v0.1.0-watcher](https://github.com/cerc-io/sushiswap-subgraphs/releases/tag/v0.1.0-watcher)
+  * Package: [subgraphs/v3](https://github.com/cerc-io/sushiswap-subgraphs/tree/release-v0.1.0-watcher/subgraphs/v3)
+
 ## Setup
 
 * Run the following command to install required packages:
