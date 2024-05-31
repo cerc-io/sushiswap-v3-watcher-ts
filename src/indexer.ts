@@ -6,7 +6,7 @@ import assert from 'assert';
 import { DeepPartial, FindConditions, FindManyOptions, ObjectLiteral } from 'typeorm';
 import debug from 'debug';
 import { ethers, constants } from 'ethers';
-import { SelectionNode } from 'graphql';
+import { GraphQLResolveInfo } from 'graphql';
 
 import { JsonFragment } from '@ethersproject/abi';
 import { BaseProvider } from '@ethersproject/providers';
@@ -339,9 +339,9 @@ export class Indexer implements IndexerInterface {
     entity: new () => Entity,
     id: string,
     block: BlockHeight,
-    selections: ReadonlyArray<SelectionNode> = []
+    queryInfo: GraphQLResolveInfo
   ): Promise<any> {
-    const data = await this._graphWatcher.getEntity(entity, id, this._relationsMap, block, selections);
+    const data = await this._graphWatcher.getEntity(entity, id, this._relationsMap, block, queryInfo);
 
     return data;
   }
@@ -351,9 +351,9 @@ export class Indexer implements IndexerInterface {
     block: BlockHeight,
     where: { [key: string]: any } = {},
     queryOptions: QueryOptions = {},
-    selections: ReadonlyArray<SelectionNode> = []
+    queryInfo: GraphQLResolveInfo
   ): Promise<any[]> {
-    return this._graphWatcher.getEntities(entity, this._relationsMap, block, where, queryOptions, selections);
+    return this._graphWatcher.getEntities(entity, this._relationsMap, block, where, queryOptions, queryInfo);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
