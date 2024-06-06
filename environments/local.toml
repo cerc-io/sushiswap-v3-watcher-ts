@@ -11,7 +11,7 @@
 
   # Enable state creation
   # CAUTION: Disable only if state creation is not desired or can be filled subsequently
-  enableState = true
+  enableState = false
 
   subgraphPath = "./subgraph-build"
 
