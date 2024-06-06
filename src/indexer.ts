@@ -395,20 +395,34 @@ export class Indexer implements IndexerInterface {
     console.timeEnd('time:indexer#processBlockAfterEvents-dump_subgraph_state');
   }
 
-  parseEventNameAndArgs (kind: string, logObj: any): any {
+  parseEventNameAndArgs (kind: string, logObj: any): { eventParsed: boolean, eventDetails: any } {
     const { topics, data } = logObj;
 
     const contract = this._contractMap.get(kind);
     assert(contract);
 
-    const logDescription = contract.parseLog({ data, topics });
+    let logDescription: ethers.utils.LogDescription;
+    try {
+      logDescription = contract.parseLog({ data, topics });
+    } catch (err) {
+      // Return if no matching event found
+      if ((err as Error).message.includes('no matching event')) {
+        log(`WARNING: Skipping event for contract ${kind} as no matching event found in the ABI`);
+        return { eventParsed: false, eventDetails: {} };
+      }
+
+      throw err;
+    }
 
     const { eventName, eventInfo, eventSignature } = this._baseIndexer.parseEvent(logDescription);
 
     return {
-      eventName,
-      eventInfo,
-      eventSignature
+      eventParsed: true,
+      eventDetails: {
+        eventName,
+        eventInfo,
+        eventSignature
+      }
     };
   }
 
@@ -518,7 +532,7 @@ export class Indexer implements IndexerInterface {
   }
 
   async getEventsInRange (fromBlockNumber: number, toBlockNumber: number): Promise<Array<Event>> {
-    return this._baseIndexer.getEventsInRange(fromBlockNumber, toBlockNumber, this._serverConfig.maxEventsBlockRange);
+    return this._baseIndexer.getEventsInRange(fromBlockNumber, toBlockNumber, this._serverConfig.gql.maxEventsBlockRange);
   }
 
   async getSyncStatus (): Promise<SyncStatus | undefined> {
