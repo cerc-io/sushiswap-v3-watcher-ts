@@ -88,6 +88,8 @@ const executeAndRecordMetrics = async (
       apiKey: expressContext.req.header('x-api-key'),
       origin: expressContext.req.headers.origin
     });
+
+    throw error;
   } finally {
     endTimer();
   }
