@@ -95,7 +95,7 @@
   blockDelayInMilliSecs = 30000
 
   # Number of blocks by which block processing lags behind head
-  blockProcessingOffset = 16
+  blockProcessingOffset = 0
 
   # Boolean to switch between modes of processing events when starting the server.
   # Setting to true will fetch filtered events and required blocks in a range of blocks and then process them.
