@@ -13,6 +13,12 @@
   yarn
   ```
 
+* Run build:
+
+  ```bash
+  yarn build
+  ```
+
 * Create a postgres12 database for the watcher:
 
   ```bash
