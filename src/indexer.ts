@@ -5,11 +5,10 @@
 import assert from 'assert';
 import { DeepPartial, FindConditions, FindManyOptions, ObjectLiteral } from 'typeorm';
 import debug from 'debug';
-import { ethers, constants } from 'ethers';
+import { ethers, constants, providers } from 'ethers';
 import { GraphQLResolveInfo } from 'graphql';
 
 import { JsonFragment } from '@ethersproject/abi';
-import { BaseProvider } from '@ethersproject/providers';
 import { MappingKey, StorageLayout } from '@cerc-io/solidity-mapper';
 import {
   Indexer as BaseIndexer,
@@ -36,6 +35,7 @@ import {
   EthFullTransaction,
   ExtraEventData
 } from '@cerc-io/util';
+import { initClients } from '@cerc-io/cli';
 import { GraphWatcher } from '@cerc-io/graph-node';
 
 import FactoryArtifacts from './artifacts/Factory.json';
@@ -88,7 +88,7 @@ const KIND_POOL = 'Pool';
 export class Indexer implements IndexerInterface {
   _db: Database;
   _ethClient: EthClient;
-  _ethProvider: BaseProvider;
+  _ethProvider: providers.JsonRpcProvider;
   _baseIndexer: BaseIndexer;
   _serverConfig: ServerConfig;
   _upstreamConfig: UpstreamConfig;
@@ -111,7 +111,7 @@ export class Indexer implements IndexerInterface {
     },
     db: DatabaseInterface,
     clients: Clients,
-    ethProvider: BaseProvider,
+    ethProvider: providers.JsonRpcProvider,
     jobQueue: JobQueue,
     graphWatcher?: GraphWatcherInterface
   ) {
@@ -201,11 +201,15 @@ export class Indexer implements IndexerInterface {
     await this._baseIndexer.fetchStateStatus();
   }
 
-  switchClients ({ ethClient, ethProvider }: { ethClient: EthClient, ethProvider: BaseProvider }): void {
+  async switchClients (): Promise<void> {
+    const { ethClient, ethProvider } = await this._baseIndexer.switchClients(initClients);
     this._ethClient = ethClient;
     this._ethProvider = ethProvider;
-    this._baseIndexer.switchClients({ ethClient, ethProvider });
     this._graphWatcher.switchClients({ ethClient, ethProvider });
+  }
+
+  async isGetLogsRequestsSlow (): Promise<boolean> {
+    return this._baseIndexer.isGetLogsRequestsSlow();
   }
 
   async getMetaData (block: BlockHeight): Promise<ResultMeta | null> {
@@ -1025,6 +1029,7 @@ export class Indexer implements IndexerInterface {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   _populateRelationsMap (): void {
     this._relationsMap.set(Token, {
       whitelistPools: {
@@ -1405,7 +1410,18 @@ export class Indexer implements IndexerInterface {
     assert(blockHash);
     assert(blockNumber);
 
-    const { events: dbEvents, transactions } = await this._baseIndexer.fetchEvents(blockHash, blockNumber, this.eventSignaturesMap, this.parseEventNameAndArgs.bind(this));
+    let dbEvents: DeepPartial<Event>[] = [];
+    let transactions: EthFullTransaction[] = [];
+
+    // Fetch events and txs only if subgraph config has any event handlers
+    if (this._graphWatcher.eventHandlerExists) {
+      ({ events: dbEvents, transactions } = await this._baseIndexer.fetchEvents(
+        blockHash,
+        blockNumber,
+        this.eventSignaturesMap,
+        this.parseEventNameAndArgs.bind(this)
+      ));
+    }
 
     const dbTx = await this._db.createTransactionRunner();
     try {
