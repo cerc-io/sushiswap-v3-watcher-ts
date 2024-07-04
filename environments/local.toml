@@ -10,7 +10,6 @@
   checkpointInterval = 2000
 
   # Enable state creation
-  # CAUTION: Disable only if state creation is not desired or can be filled subsequently
   enableState = false
 
   subgraphPath = "./subgraph-build"
