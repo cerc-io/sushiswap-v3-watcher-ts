@@ -10,7 +10,6 @@
   checkpointInterval = 2000
 
   # Enable state creation
-  # CAUTION: Disable only if state creation is not desired or can be filled subsequently
   enableState = false
 
   subgraphPath = "./subgraph-build"
@@ -79,6 +78,10 @@
     filterLogsByAddresses = true
     # Boolean flag to filter event logs by topics
     filterLogsByTopics = true
+
+    # Switch clients if eth_getLogs call takes more than threshold (in secs)
+    # Set to 0 for disabling switching
+    getLogsClientSwitchThresholdInSecs = 30
 
   [upstream.cache]
     name = "requests"
