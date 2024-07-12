@@ -5,7 +5,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 
 @Entity()
-@Index(['address'], { unique: true })
+@Index(['address', 'kind'], { unique: true })
 export class Contract {
   @PrimaryGeneratedColumn()
     id!: number;

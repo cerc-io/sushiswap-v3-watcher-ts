@@ -399,23 +399,27 @@ export class Indexer implements IndexerInterface {
     console.timeEnd('time:indexer#processBlockAfterEvents-dump_subgraph_state');
   }
 
-  parseEventNameAndArgs (kind: string, logObj: any): { eventParsed: boolean, eventDetails: any } {
+  parseEventNameAndArgs (watchedContracts: Contract[], logObj: any): { eventParsed: boolean, eventDetails: any } {
     const { topics, data } = logObj;
+    let logDescription: ethers.utils.LogDescription | undefined;
 
-    const contract = this._contractMap.get(kind);
-    assert(contract);
+    for (const watchedContract of watchedContracts) {
+      const contract = this._contractMap.get(watchedContract.kind);
+      assert(contract);
 
-    let logDescription: ethers.utils.LogDescription;
-    try {
-      logDescription = contract.parseLog({ data, topics });
-    } catch (err) {
-      // Return if no matching event found
-      if ((err as Error).message.includes('no matching event')) {
-        log(`WARNING: Skipping event for contract ${kind} as no matching event found in the ABI`);
-        return { eventParsed: false, eventDetails: {} };
+      try {
+        logDescription = contract.parseLog({ data, topics });
+        break;
+      } catch (err) {
+        // Continue loop only if no matching event found
+        if (!((err as Error).message.includes('no matching event'))) {
+          throw err;
+        }
       }
+    }
 
-      throw err;
+    if (!logDescription) {
+      return { eventParsed: false, eventDetails: {} };
     }
 
     const { eventName, eventInfo, eventSignature } = this._baseIndexer.parseEvent(logDescription);
@@ -519,8 +523,8 @@ export class Indexer implements IndexerInterface {
     return this._baseIndexer.getEventsByFilter(blockHash, contract, name);
   }
 
-  isWatchedContract (address : string): Contract | undefined {
-    return this._baseIndexer.isWatchedContract(address);
+  isContractAddressWatched (address : string): Contract[] | undefined {
+    return this._baseIndexer.isContractAddressWatched(address);
   }
 
   getWatchedContracts (): Contract[] {
@@ -545,6 +549,10 @@ export class Indexer implements IndexerInterface {
 
   async getBlocks (blockFilter: { blockHash?: string, blockNumber?: number }): Promise<any> {
     return this._baseIndexer.getBlocks(blockFilter);
+  }
+
+  async getBlockByHash (blockHash?: string): Promise<{ block: any }> {
+    return this._baseIndexer.getBlockByHash(blockHash);
   }
 
   async updateSyncStatusIndexedBlock (blockHash: string, blockNumber: number, force = false): Promise<SyncStatus> {
