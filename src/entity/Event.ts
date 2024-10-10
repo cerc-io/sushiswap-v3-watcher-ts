@@ -27,7 +27,7 @@ export class Event {
   @Column('varchar', { length: 256 })
     eventName!: string;
 
-  @Column('varchar', { length: 66, nullable: true })
+  @Column('varchar', { length: 66 })
     topic0!: string;
 
   @Column('varchar', { length: 66, nullable: true })
@@ -39,7 +39,7 @@ export class Event {
   @Column('varchar', { length: 66, nullable: true })
     topic3!: string | null;
 
-  @Column('varchar', { nullable: true })
+  @Column('varchar')
     data!: string;
 
   @Column('text')
