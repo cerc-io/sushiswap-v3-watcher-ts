@@ -1,6 +1,6 @@
 {
   "name": "@cerc-io/sushiswap-v3-watcher-ts",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "sushiswap-v3-watcher-ts",
   "private": true,
   "main": "dist/index.js",
@@ -26,7 +26,7 @@
     "import-state:dev": "DEBUG=vulcanize:* ts-node src/cli/import-state.ts",
     "inspect-cid": "DEBUG=vulcanize:* ts-node src/cli/inspect-cid.ts",
     "index-block": "DEBUG=vulcanize:* ts-node src/cli/index-block.ts",
-    "backfill-events": "YARN_CHILD_PROCESS=true node --enable-source-maps dist/backfill-events-data.js"
+    "backfill-events-data": "YARN_CHILD_PROCESS=true node --enable-source-maps dist/backfill-events-data.js"
   },
   "repository": {
     "type": "git",
@@ -40,11 +40,11 @@
   "homepage": "https://github.com/cerc-io/watcher-ts#readme",
   "dependencies": {
     "@apollo/client": "^3.3.19",
-    "@cerc-io/cli": "^0.2.107",
-    "@cerc-io/ipld-eth-client": "^0.2.107",
-    "@cerc-io/solidity-mapper": "^0.2.107",
-    "@cerc-io/util": "^0.2.107",
-    "@cerc-io/graph-node": "^0.2.107",
+    "@cerc-io/cli": "^0.2.108",
+    "@cerc-io/ipld-eth-client": "^0.2.108",
+    "@cerc-io/solidity-mapper": "^0.2.108",
+    "@cerc-io/util": "^0.2.108",
+    "@cerc-io/graph-node": "^0.2.108",
     "@ethersproject/providers": "^5.4.4",
     "debug": "^4.3.1",
     "decimal.js": "^10.3.1",
