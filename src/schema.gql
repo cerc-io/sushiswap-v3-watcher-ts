@@ -4775,8 +4775,8 @@ type Token {
   totalValueLockedUSD: BigDecimal!
   totalValueLockedUSDUntracked: BigDecimal!
   derivedETH: BigDecimal!
-  whitelistPools: [Pool!]!
-  tokenDayData: [TokenDayData!]!
+  whitelistPools(where: Pool_filter, orderBy: Pool_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Pool!]!
+  tokenDayData(where: TokenDayData_filter, orderBy: TokenDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [TokenDayData!]!
 }
 
 type Pool {
@@ -4809,13 +4809,13 @@ type Pool {
   totalValueLockedUSD: BigDecimal!
   totalValueLockedUSDUntracked: BigDecimal!
   liquidityProviderCount: BigInt!
-  poolHourData: [PoolHourData!]!
-  poolDayData: [PoolDayData!]!
-  mints: [Mint!]!
-  burns: [Burn!]!
-  swaps: [Swap!]!
-  collects: [Collect!]!
-  ticks: [Tick!]!
+  poolHourData(where: PoolHourData_filter, orderBy: PoolHourData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PoolHourData!]!
+  poolDayData(where: PoolDayData_filter, orderBy: PoolDayData_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [PoolDayData!]!
+  mints(where: Mint_filter, orderBy: Mint_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Mint!]!
+  burns(where: Burn_filter, orderBy: Burn_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Burn!]!
+  swaps(where: Swap_filter, orderBy: Swap_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Swap!]!
+  collects(where: Collect_filter, orderBy: Collect_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Collect!]!
+  ticks(where: Tick_filter, orderBy: Tick_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Tick!]!
 }
 
 type PoolHourData {
@@ -4889,11 +4889,11 @@ type Transaction {
   timestamp: BigInt!
   gasUsed: BigInt!
   gasPrice: BigInt!
-  mints: [Mint!]!
-  burns: [Burn!]!
-  swaps: [Swap!]!
-  flashed: [Flash!]!
-  collects: [Collect!]!
+  mints(where: Mint_filter, orderBy: Mint_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Mint!]!
+  burns(where: Burn_filter, orderBy: Burn_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Burn!]!
+  swaps(where: Swap_filter, orderBy: Swap_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Swap!]!
+  flashed(where: Flash_filter, orderBy: Flash_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Flash!]!
+  collects(where: Collect_filter, orderBy: Collect_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [Collect!]!
 }
 
 type Burn {
@@ -5025,8 +5025,8 @@ type Position {
   transaction: Transaction!
   feeGrowthInside0LastX128: BigInt!
   feeGrowthInside1LastX128: BigInt!
-  increaseEvents: [IncreaseEvent!]!
-  decreaseEvents: [IncreaseEvent!]!
+  increaseEvents(where: IncreaseEvent_filter, orderBy: IncreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [IncreaseEvent!]!
+  decreaseEvents(where: IncreaseEvent_filter, orderBy: IncreaseEvent_orderBy, orderDirection: OrderDirection, first: Int = 100, skip: Int = 0): [IncreaseEvent!]!
 }
 
 type IncreaseEvent {

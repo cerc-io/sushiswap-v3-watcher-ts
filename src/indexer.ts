@@ -192,6 +192,10 @@ export class Indexer implements IndexerInterface {
     return this._storageLayoutMap;
   }
 
+  get contractMap (): Map<string, ethers.utils.Interface> {
+    return this._contractMap;
+  }
+
   get graphWatcher (): GraphWatcher {
     return this._graphWatcher;
   }
@@ -503,6 +507,10 @@ export class Indexer implements IndexerInterface {
     return this._baseIndexer.watchContract(address, kind, checkpoint, startingBlock, context);
   }
 
+  async removeContract (address: string, kind: string): Promise<void> {
+    return this._baseIndexer.removeContract(address, kind);
+  }
+
   updateStateStatusMap (address: string, stateStatus: StateStatus): void {
     this._baseIndexer.updateStateStatusMap(address, stateStatus);
   }
@@ -541,6 +549,10 @@ export class Indexer implements IndexerInterface {
 
   async getEventsInRange (fromBlockNumber: number, toBlockNumber: number): Promise<Array<Event>> {
     return this._baseIndexer.getEventsInRange(fromBlockNumber, toBlockNumber, this._serverConfig.gql.maxEventsBlockRange);
+  }
+
+  async getEvents (options: FindManyOptions<Event>): Promise<Array<Event>> {
+    return this._db.getEvents(options);
   }
 
   async getSyncStatus (): Promise<SyncStatus | undefined> {

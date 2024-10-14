@@ -27,6 +27,21 @@ export class Event {
   @Column('varchar', { length: 256 })
     eventName!: string;
 
+  @Column('varchar', { length: 66 })
+    topic0!: string;
+
+  @Column('varchar', { length: 66, nullable: true })
+    topic1!: string | null;
+
+  @Column('varchar', { length: 66, nullable: true })
+    topic2!: string | null;
+
+  @Column('varchar', { length: 66, nullable: true })
+    topic3!: string | null;
+
+  @Column('varchar')
+    data!: string;
+
   @Column('text')
     eventInfo!: string;
 
