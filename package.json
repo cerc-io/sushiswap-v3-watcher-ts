@@ -26,7 +26,7 @@
     "import-state:dev": "DEBUG=vulcanize:* ts-node src/cli/import-state.ts",
     "inspect-cid": "DEBUG=vulcanize:* ts-node src/cli/inspect-cid.ts",
     "index-block": "DEBUG=vulcanize:* ts-node src/cli/index-block.ts",
-    "backfill-events-data": "YARN_CHILD_PROCESS=true node --enable-source-maps dist/backfill-events-data.js"
+    "backfill-events-data": "DEBUG=vulcanize:* YARN_CHILD_PROCESS=true node --enable-source-maps dist/cli/backfill-events-data.js"
   },
   "repository": {
     "type": "git",
